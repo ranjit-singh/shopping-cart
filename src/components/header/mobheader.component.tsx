@@ -1,22 +1,20 @@
-import React, { Component } from 'react';
+import * as React from 'react';
+import { Link } from 'react-router-dom';
+import { RouterPathEnum } from '../../enums/RouterPathEnum';
 
-class MobileHeader extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
+class MobileHeader extends React.Component<React.Props<MobileHeader>, {}> {
+constructor(props: React.Props<MobileHeader>) {
+super(props);
+}
 
-  render() {
-    return null;
-  }
+render() {
+return(
+<ul className='ulContainer'>
+<li><Link to={ RouterPathEnum.HOME }>HOME</Link></li>
+<li><Link to={ RouterPathEnum.CHECKOUT }>CHECKOUT</Link></li>
+</ul>
+);
 }
-MobileHeader.propTypes = {
-  items: PropTypes.oneOfType([
-        PropTypes.object, PropTypes.array, PropTypes.string]),
-  title: PropTypes.string
-}
-MobileHeader.defaultProps = {
-  items: []
 }
 
 export default MobileHeader;

@@ -1,26 +1,36 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import style from './home.scss';
+import * as React from 'react';
+import { RouteComponentProps } from 'react-router';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { RouterPathEnum } from '../../enums/RouterPathEnum';
 
-class HomeComponent extends Component {
-  constructor(props) {
+class Home extends React.Component<RouteComponentProps<Home>, {}> {
+  constructor(props : RouteComponentProps<Home>){
     super(props);
-    this.state = {};
   }
 
   render() {
-    const { title } = this.props;
-    return (
-      <div className={style['hello-world']}>{title}</div>
+    return(
+      <main className="flex flex-column justify-center items-center">
+        <h2>home</h2>
+        <button onClick={ ( e: any ) => this.onClickMove( RouterPathEnum.CHECKOUT ) }>
+            go CHECKOUT
+        </button>
+        &nbsp;
+        <button onClick={ ( e: any ) => this.onClickMove( RouterPathEnum.HOME ) }>
+            go Home
+        </button>
+        <FontAwesomeIcon 
+          icon={['fas', 'spinner']}
+          pulse
+          fixedWidth
+          size="4x" />
+      </main>
     );
+  }
+
+  private onClickMove = ( routerPathEnum: RouterPathEnum ) => {
+    this.props.history.push( routerPathEnum );
   }
 }
 
-HomeComponent.propTypes = {
-  title: PropTypes.string
-};
-HomeComponent.defaultProps = {
-  title: 'Welcome'
-}
-
-export default HomeComponent;
+export default Home;

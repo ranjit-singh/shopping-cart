@@ -1,26 +1,30 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import style from './checkout.scss';
+import * as React from 'react';
+import { RouteComponentProps } from 'react-router';
+import { RouterPathEnum } from '../../enums/RouterPathEnum';
 
-class CheckoutComponent extends Component {
-  constructor(props) {
+class Checkout extends React.Component<RouteComponentProps<Checkout>, {}> {
+  constructor(props : RouteComponentProps<Checkout>){
     super(props);
-    this.state = {};
   }
 
   render() {
-    const { title } = this.props;
-    return (
-      <div className={style['hello-world']}>{title}</div>
+    return(
+      <div>
+        <h2>home</h2>
+        <button onClick={ ( e: any ) => this.onClickMove( RouterPathEnum.CHECKOUT ) }>
+            go CHECKOUT
+        </button>
+        &nbsp;
+        <button onClick={ ( e: any ) => this.onClickMove( RouterPathEnum.HOME ) }>
+            go Home
+        </button>
+      </div>
     );
+  }
+
+  private onClickMove = ( routerPathEnum: RouterPathEnum ) => {
+    this.props.history.push( routerPathEnum );
   }
 }
 
-CheckoutComponent.propTypes = {
-  title: PropTypes.string
-};
-CheckoutComponent.defaultProps = {
-  title: 'Welcome'
-}
-
-export default CheckoutComponent;
+export default Checkout;
