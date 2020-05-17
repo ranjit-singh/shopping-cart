@@ -1,18 +1,38 @@
+@import '../../styles/index.scss';
+
 .card-container {
-    border: 1px solid red;
+    padding-left: 200px;
 }
-.card {
-    flex-basis: 20%;
-    padding: 20px;
+.s-card {
+    padding: 8px;
+    width: 20%;
     img {
         width: 100%;
     }
-    .card-body {
-        
+    &__title {
+        font-size: 16px;
+        padding: 8px 0;
+        color: $color-grey;
     }
-    .card-detail {
+    &__detail {
+        font-size: 14px;
+        font-weight: 600;
     }
-    .card-footer {
-        padding: 15px 0;
+    &--disprice {
+        color: $color-black;
+    }
+    &--orgprice {
+        font-size: 13px;
+        color: $color-grey;
+    }
+    &--disprice + &--orgprice {
+        margin-left: 5px;
+    }
+    .s-card__discount {
+        font-size: 14px;
+        color: $color-green;
+    }
+    &__footer {
+        padding: 26px 0;
     }
 }

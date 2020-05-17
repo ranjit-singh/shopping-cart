@@ -23,10 +23,10 @@ return(
         </Link>
     </div>
     <div className='header__right flex 123'>
-        <Search className='header__search' />
+        <Search className='header__search-box' />
         <Link to={ RouterPathEnum.CHECKOUT } className='header__right__shopping-cart'>
             <CartIcon />
-            <div className='shopping-cart__count'>1</div>
+            <span className='shopping-cart__count'>1</span>
         </Link>
     </div>
 </header>

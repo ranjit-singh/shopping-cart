@@ -9,7 +9,7 @@ class Filter extends React.Component {
             maxValue: 10000
         };
     }
-
+    
     getMinValue = (event: any) => {
         this.setState({ minValue: event.target.value });
     }
@@ -24,14 +24,17 @@ class Filter extends React.Component {
             maxValue
         } = this.state;
         return (
-            <div className='col-lg-4'>
-                <div data-role='main' className='ui-content'>
-                    <div data-role='rangeslider'>
-                        <input type='range' name='price-min' id='price-min' value={minValue} min={minValue} max={maxValue} onChange={this.getMinValue} readOnly />
+            <div className='filter'>
+                <div className='filter__header'>
+                    <h4>Filters</h4>
+                </div>
+                <div data-role='main' className='ui-content filter__body'>
+                    <div className='form-group' data-role='rangeslider'>
+                        <input type='range' className='form-control-range' name='price-min' id='price-min' value={minValue} min={minValue} max={maxValue} onChange={this.getMinValue} readOnly />
                         <input type='range' name='price-max' id='price-max' value={maxValue} min={minValue} max={maxValue} onChange={this.getMaxValue} readOnly />
                     </div>
                     <label htmlFor='price-max'>Price</label>
-                    <button data-inline='true'>Apply</button>
+                    <button type="submit" className='utton button--blue'>Apply</button>
                 </div>
             </div>
         );
