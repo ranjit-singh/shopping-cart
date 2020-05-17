@@ -5,6 +5,7 @@ import MobileHeader from '../../components/header/mobheader.component';
 import Filter from '../../components/filter/filter.component';
 import ShoppingItem from '../../components/shoppinglist/shoppingitem.component';
 import itemList from '../../mock/cart.json';
+import './home.scss';
 
 interface IState {
 isSmallScreen: boolean;
@@ -44,7 +45,7 @@ class Home extends React.Component<{}, IState> {
       <div className='container-fluid'>
         <div className="row">
           { this.state.isSmallScreen ? <MobileHeader /> : <Header /> }        
-          <main className="row min-vh-100 flex flex-row">
+          <main className="home-container">
             <Filter />
             <ShoppingItem products={items} />
             {/* <FontAwesomeIcon 

@@ -1,5 +1,6 @@
+@import '../../styles/index.scss';
+
 .home-container {
-    margin-top: 10em;
-    font-size: 2em;
-    text-align: center;
+    background-color: $color-lightgrey;
+    padding: 66px 8px 8px;
 }

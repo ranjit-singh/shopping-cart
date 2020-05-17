@@ -9,9 +9,17 @@ class Filter extends React.Component {
 
         render() {
             return (
-                <div className='col-lg-4'>
-                    <div className="side-pusher">
-                        <h1>SIDE</h1>
+                <div className='filter'>
+                    <div className='filter__header'>
+                        <h4>Filters</h4>
+                    </div>
+                    <div className='filter__body justify-lg-'>
+                        <form>
+                            <div className='form-group'>
+                                <input type='range' className='form-control-range' id='formControlRange' />
+                            </div>
+                            <button type="submit" class="button button--blue">Apply</button>
+                        </form>
                     </div>
                 </div>
             );
