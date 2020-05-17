@@ -14,25 +14,25 @@ class ShoppingItem extends React.Component {
         const contentElm = [];
         products.map((item: { image: string | undefined; name: React.ReactNode; }) => {
             contentElm.push(
-                <div className='card flex flex-column'>
-                    <div className='card-header'></div>
-                    <img src={item.image} className='card-img-top' />
-                        <div className='card-body'>
-                        <h5 className='card-title'>{item.name}</h5>
-                            <div className='card-detail flex flex-row justify-content-lg-between'>
-                                <div>
-                                    <span>300</span>
-                                    <span>300</span>
-                                </div>
-                                <div>
-                                    <span>64% off</span>
-                                </div>
+                <div className='s-card flex flex-column'>
+                    <div className='s-card-header'>
+                        <img src={item.image} className='card-img-top' />
+                    </div>
+                    <div className='s-card__body'>
+                        <div className='s-card__title'>{item.name}</div>
+                        <div className='s-card__detail flex flex-row justify-content-lg-between'>
+                            <div className='s-card__price'>
+                                <span className='s-card--disprice'>&#x20B9;300</span>
+                                <span className='s-card--orgprice'><del>300</del></span>
                             </div>
-                            <a href='#' className='btn btn-primary'></a>
+                            <div className='s-card__discount'>
+                                <span>64% off</span>
+                            </div>
                         </div>
-                        <div className='card-footer flex justify-center'>
-                        <button type="button" class='btn btn-primary'>Primary</button>
-                        </div>
+                    </div>
+                    <div className='s-card__footer flex justify-center'>
+                        <button type="button" className='button button--yellow'>Add to Cart</button>
+                    </div>
                 </div>
         );
         })
@@ -41,10 +41,8 @@ class ShoppingItem extends React.Component {
         render() {
             const { products } = this.props;
             return (
-                <div className='col-lg-8'>
-                    <div className='card-container flex justify-content-lg-start flex-lg-wrap'>
-                        {this.getProductList(products)}
-                    </div>
+                <div className='card-container flex justify-content-lg-start flex-lg-wrap'>
+                    {this.getProductList(products)}
                 </div>
             );
         }

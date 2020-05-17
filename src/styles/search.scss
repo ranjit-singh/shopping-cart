@@ -1,0 +1,14 @@
+.search-box {
+    position: relative;
+    input {
+        border: none;
+        border-bottom: 1px solid $color-white !important;
+        background-color: transparent;
+    }
+    svg[data-icon="search"] {
+        color: $color-white;
+        position: absolute;
+        right: 5px;
+        bottom: 13px;
+    }
+}

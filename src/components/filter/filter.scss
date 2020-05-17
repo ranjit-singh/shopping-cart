@@ -1,0 +1,21 @@
+@import '../../styles/index.scss';
+
+.filter {
+    width: 200px;
+    height: 100%;
+    padding: 20px;
+    position: fixed;
+    left: 0;
+    z-index: 1;
+    &__header {
+        color: $color-black;
+    }
+    &__body {
+        margin: 24px 0;
+        .button {
+            margin-top: 24px;
+            display: block;
+            width: 100%;
+        }
+    }
+}
