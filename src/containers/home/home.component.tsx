@@ -1,6 +1,5 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Header from '../../components/header/header.component';
 import MobileHeader from '../../components/header/mobheader.component';
 import Filter from '../../components/filter/filter.component';
