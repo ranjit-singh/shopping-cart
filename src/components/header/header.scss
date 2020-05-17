@@ -19,9 +19,11 @@
         }
         &__shopping-cart {
             position: relative;
-            color: $color-white;
+            color: $color-white !important;
             cursor: pointer;
             padding: 0 8px;
+            display: flex;
+            align-items: center;
             &:hover {
                 color: $color-white;
             }

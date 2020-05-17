@@ -22,7 +22,7 @@ return(
             />
         </Link>
     </div>
-    <div className='header__right flex 123'>
+    <div className='header__right flex'>
         <Search className='header__search-box' />
         <Link to={ RouterPathEnum.CHECKOUT } className='header__right__shopping-cart'>
             <CartIcon />
