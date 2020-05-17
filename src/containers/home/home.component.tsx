@@ -26,7 +26,6 @@ class Home extends React.Component<{}, IState> {
   
   componentDidMount() {
 		window.addEventListener('resize', this.updateDimensions);
-
 		this.updateDimensions();
 	}
 	componentWillUnmount() {
@@ -35,7 +34,7 @@ class Home extends React.Component<{}, IState> {
 
 	private updateDimensions = () => {
 		let items = itemList.items;
-		this.setState({ isSmallScreen: window.innerWidth < 500, items });
+    this.setState({ isSmallScreen: window.innerWidth < 500, items });
 	}
 
   render() {
@@ -48,11 +47,6 @@ class Home extends React.Component<{}, IState> {
           <main className="home-container">
             <Filter />
             <ShoppingItem products={items} />
-            {/* <FontAwesomeIcon 
-              icon={['fas', 'spinner']}
-              pulse
-              fixedWidth
-              size="4x" /> */}
           </main>
         </div>
       </div>
