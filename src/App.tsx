@@ -33,51 +33,32 @@ import {
   )
 import Home from './containers/home/home.component';
 import Checkout from './containers/checkout/checkout.component';
-import Header from './components/header/header.component';
-import MobileHeader from './components/header/mobheader.component';
-import itemList from './mock/cart.json';
+import './styles/index.scss';
 
 interface IState {
-isSmallScreen: boolean;
-items: any;
+cartItem: any;
 }
 
 class App extends React.Component<{}, IState> {
-	state: { isSmallScreen: boolean; items: any; };
+	state: { cartItem: any; };
 	constructor(props : any){
 		super(props);
 		this.state = { 
-			isSmallScreen: false,
-			items: []
+			cartItem: []
 		 };
 	}
-	componentDidMount() {
-		window.addEventListener('resize', this.updateDimensions);
-
-		this.updateDimensions();
-	}
-	componentWillUnmount() {
-		window.removeEventListener('resize', this.updateDimensions);
-	}
-
-	private updateDimensions = () => {
-		let items = itemList.items;
-		this.setState({ isSmallScreen: window.innerWidth < 500, items });
+	onEventHandler = (eventName: any, value: any) => {
+		console.log(eventName, value);
 	}
 
 	public render() {
 		return (
 		<BrowserRouter>
-			<div className='container bg-light-gray'>
-			{ this.state.isSmallScreen ? <MobileHeader /> : <Header /> }
-				<div className='w-100 min-vh-100 bg-gray8 white sans-serif pa6 flex flex-column justify-center items-center'>
-					<Switch>
-						<Route exact={true} path={RouterPathEnum.HOME} component={Home}/>
-						<Route path={RouterPathEnum.CHECKOUT} component={Checkout}/>
-						<Redirect to={RouterPathEnum.HOME} />
-					</Switch>
-				</div>
-			</div>
+			<Switch>
+				<Route exact={true} path={RouterPathEnum.HOME} component={() => <Home  onEvent={this.onEventHandler} />} />
+				<Route exact={true} path={RouterPathEnum.CHECKOUT} component={() => <Checkout cartItems={this.state.cartItem} />} />
+				<Redirect to={RouterPathEnum.HOME} />
+			</Switch>
 		</BrowserRouter>
 		);
 	}

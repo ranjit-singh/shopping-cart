@@ -1,8 +1,44 @@
+@import '../../styles/index.scss';
+
 .header {
-    .header__left-side {
-        float: left;
+    background-color: $color-blue;
+    &__logo {
+        padding: 16px 0;
     }
-    .header__right-side {
-        float: right;
+    &__right {
+        padding: 16px 0;
+        &__search-box {
+            position: relative;
+            margin: 0 8px;
+            input {
+                border: none;
+                border-bottom: 1px solid $color-white !important;
+                background-color: transparent;
+            }
+            svg[data-icon="search"] {
+                color: $color-white;
+                position: absolute;
+                right: 5px;
+                bottom: 13px;
+            }
+        }
+        &__shopping-cart {
+            position: relative;
+            color: $color-white;
+            cursor: pointer;
+            padding: 0 8px;
+            &:hover {
+                color: $color-white;
+            }
+            .shopping-cart__count {
+                position: absolute;
+                top: 0;
+                right: 0;
+                background-color: $color-red;
+                font-size: 10px;
+                
+            }
+        }
     }
+    
 }

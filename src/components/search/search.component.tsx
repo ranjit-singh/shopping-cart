@@ -8,7 +8,7 @@ super(props);
 
 render() {
 return(
-    <div className='header__right-side__search-box'>
+    <div className='header__right__search-box'>
         <input type='search' name='search' />
         <FontAwesomeIcon
             icon={['fas', 'search']}
