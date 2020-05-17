@@ -2,18 +2,35 @@ import * as React from 'react';
 import PropTypes from 'prop-types';
 import { RouteComponentProps } from 'react-router';
 import { RouterPathEnum } from '../../enums/RouterPathEnum';
+import MobileHeader from '../../components/header/mobheader.component';
+import Header from '../../components/header/header.component';
 
 class Checkout extends React.Component<RouteComponentProps<Checkout>, {}> {
-  static propTypes: { cartItems: <P extends PropTypes.ValidationMap<any>>(type: P) => PropTypes.Requireable<PropTypes.InferProps<P>>; };
+  static propTypes: { isSmallScreen: boolean; cartItems: <P extends PropTypes.ValidationMap<any>>(type: P) => PropTypes.Requireable<PropTypes.InferProps<P>>; };
   static defaultProps: { cartItems: never[]; };
   constructor(props : RouteComponentProps<Checkout>){
     super(props);
+    this.state = { 
+			isSmallScreen: false
+		 };
   }
+  
+  componentDidMount() {
+		window.addEventListener('resize', this.updateDimensions);
 
+		this.updateDimensions();
+	}
+	componentWillUnmount() {
+		window.removeEventListener('resize', this.updateDimensions);
+	}
+
+	private updateDimensions = () => {
+		this.setState({ isSmallScreen: window.innerWidth < 500 });
+	}
   render() {
     return(
       <div>
-        <h2>home</h2>
+        { this.state.isSmallScreen ? <MobileHeader /> : <Header /> } 
         <button onClick={ ( e: any ) => this.onClickMove( RouterPathEnum.CHECKOUT ) }>
             go CHECKOUT
         </button>
