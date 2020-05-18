@@ -4,41 +4,27 @@ import Header from '../../components/header/header.component';
 import Filter from '../../components/filter/filter.component';
 import ShoppingItem from '../../components/shoppinglist/shoppingitem.component';
 import ModalBox from '../../components/common/modal';
-import itemList from '../../mock/cart.json';
 import './home.scss';
 
 class Home extends React.Component {
-state: { isSmallScreen: boolean; items: any; };
+state: { items: any; };
 static propTypes: { onEvent: any; cart: any };
 static defaultProps: { onEvent: () => {}; cart: []; };
 	constructor(props: Readonly<{}>) {
 		super(props);
 		this.state = { 
-			isSmallScreen: false,
-      items: itemList.items
+      items: this.props.items
     };
      this.setCartItem = this.setCartItem.bind(this);
      this.applyFilter = this.applyFilter.bind(this);
   }
   
-  componentDidMount() {
-		window.addEventListener('resize', this.updateDimensions);
-		this.updateDimensions();
-	}
-	componentWillUnmount() {
-		window.removeEventListener('resize', this.updateDimensions);
-	}
-
-	private updateDimensions = () => {
-    this.setState({ isSmallScreen: window.innerWidth < 500 });
-  }
-
   setCartItem = (e: any, item: any) => {
     this.props.onEvent(e, item);
   }
 
   applyFilter = (filterOptions: { minValue: number; maxValue: number; }) => {
-    const items = Object.assign(itemList.items);
+    const { items } = this.props;
     const filterItems = items.filter((item: { price: { actual: number; }; }) => {
       return item.price.actual > filterOptions.minValue && item.price.actual < filterOptions.maxValue;
     });
@@ -79,10 +65,12 @@ static defaultProps: { onEvent: () => {}; cart: []; };
 
 Home.propTypes = {
   onEvent: PropTypes.func,
-  cart: PropTypes.shape
+  cart: PropTypes.shape,
+  items: PropTypes.shape
 }
 Home.defaultProps = {
   onEvent: () => {},
-  cart: []
+  cart: [],
+  items: []
 }
 export default Home;
