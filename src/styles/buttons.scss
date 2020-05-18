@@ -14,5 +14,9 @@
 } 
 .button--yellow {
     background-color: $color-yellow;
-    color: $color-black;
+    color: $color-fontgrey;
 }  
+.button-transparent {
+    background-color: transparent;
+    color: $color-titlegrey;
+}
