@@ -1,6 +1,12 @@
 @import '../../styles/index.scss';
 
+
 .home-container {
     background-color: $color-lightgrey;
     padding: 66px 8px 0 0;
+    width: 100%;
+    min-height: 100vh;
+}
+.wrapper {
+    min-height: 100vh;
 }

@@ -33,14 +33,13 @@ class Filter extends React.Component {
         } = this.props;
         contentElm.push(
             <div className='filter__body'>
-                <div className='form-group'>
-                    <span className='rangeslider--rupeesymbol'>&#8377;</span>
+                <div className='form-group rangeslider'>
                     <ReactSlider
                         min={minValue}
                         max={maxValue}
-                        className="horizontal-range-slider"
-                        thumbClassName="slider-thumb"
-                        trackClassName="slider-track"
+                        className="horizontal-range__slider"
+                        thumbClassName="slider__thumb"
+                        trackClassName="slider__track"
                         defaultValue={[minValue, maxValue]}
                         ariaLabel={['Lower thumb', 'Upper thumb']}
                         ariaValuetext={state => `Thumb value ${state.valueNow}`}
@@ -49,9 +48,8 @@ class Filter extends React.Component {
                         minDistance={10}
                         onChange={this.onChange}
                     />
-                    <span className='rangeslider--rupeesymbol'>&#8377;</span>
+                    <span htmlFor='price-max'className='horizontal-range__slider--label'>Price</span>
                 </div>
-                <label htmlFor='price-max'className='rangeslider__label'>Price</label>
                 <button type='submit' className='button button--blue' onClick={this.applyFilter}>Apply</button>
             </div>
         );
