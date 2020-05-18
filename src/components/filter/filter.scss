@@ -43,19 +43,13 @@
     width: 100%;
     max-width: 180px;
     height: 50px;
-    margin-top: 20px;
+    margin: 20px auto 0;
     .slider__track {
         top: 25px;
         height: 5px;
         background-color: $color-blue;
         &.slider__track-0, &.slider__track-2 {
             background-color: $color-darkgrey;
-        }
-        &.slider-track-1 {
-            background: rgb(255, 0, 0);
-        }
-        &.slider-track-2 {
-            background: rgb(0, 255, 0);
         }
     }
     .slider__thumb {

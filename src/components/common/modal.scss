@@ -1,20 +1,36 @@
 @import '../../styles/index.scss';
 
 .modal {
-    .modal-header {
-        border-radius: 0;
-        padding: 15px 15px 10px;
-        border: none;
-        .modal-title, .modal-title.h4 {
-            height: auto;
-            font-size: 18px;
-            color: $color-fontgrey;
-        }
-    }
     .modal-content {
         border-radius: 0;
     }
     .modal-body {
-        padding: 10px 15px 15px;
+        padding: 20px;
+        .sort-mobile__header, .filter-mobile__header {
+            h3, h4 {
+                font-size: 18px;
+                color: $color-fontgrey;
+                margin-bottom: 20px;
+            }
+        }
+    }
+    .modal-footer {
+        display: flex;
+        flex-direction: row;
+        padding: 0;
+        border-top: 1px solid $color-darkgrey;
+        button {
+            width: 50%;
+            margin: 0;
+            padding: 10px;
+            border-radius: 0;
+            background-color: transparent;
+            color: $color-blue;
+            border: none;
+            font-weight: bold;
+        }
+        button + button {
+            border-left: 1px solid $color-darkgrey;
+        }
     }
 }
