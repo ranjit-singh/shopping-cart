@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Modal, Button } from 'react-bootstrap';
 import './sort.scss';
+import './../common/modal.scss';
 
 class Sort extends React.Component {
     constructor(props: Readonly<{}>) {
@@ -72,10 +73,10 @@ class Sort extends React.Component {
                 size='sm'
                 show={true}
                 onHide={() => this.setSmShow(false)}
-                aria-labelledby='sorting-modal-sizes-title-sm'
+                aria-labelledby='sort-modal-sizes-title-sm'
             >
             <Modal.Body>
-                <div className='filter-mobile__header'>
+                <div className='sort-mobile__header'>
                     <h3>Sorting Options</h3>
                 </div>
                 <ul className='m-card-sort__items flex flex-column'>
@@ -83,10 +84,10 @@ class Sort extends React.Component {
                 </ul>
             </Modal.Body>
             <Modal.Footer>
-            <Button variant='secondary' onClick={() => {this.setSmShow(false)}}>
+            <Button onClick={() => {this.setSmShow(false)}}>
                 Cancel
             </Button>
-            <Button variant='primary' onClick={() => {this.applySorting({ key: this.state.sortType})}}>
+            <Button onClick={() => {this.applySorting({ key: this.state.sortType})}}>
                 Apply
             </Button>
             </Modal.Footer>
