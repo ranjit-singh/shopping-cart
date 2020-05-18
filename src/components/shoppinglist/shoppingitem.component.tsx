@@ -1,7 +1,9 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
+import isEmpty from 'lodash/isEmpty';
 import Sort from '../sort/sort.component';
 import './shoppingitem.scss';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 class ShoppingItem extends React.Component {
     static propTypes: { products: any; onEvent: any;};
@@ -74,7 +76,13 @@ class ShoppingItem extends React.Component {
                 <div className='main-container flex flex-column'>
                     <Sort onEvent={(type) => {this.SortBy(type);}} onEventFilter={this.props.onEventFilter} />
                     <div className='card-container'>
-                        {this.getProductList(products)}
+                        {!isEmpty(products) ? this.getProductList(products) 
+                        : <FontAwesomeIcon
+                            icon={['fas', 'spinner']}
+                            size='4x'
+                            fixedWidth
+                        />
+                        }
                     </div>
                 </div>
             );
