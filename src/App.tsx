@@ -50,6 +50,10 @@ class App extends React.Component {
 		this.setState({ cartItem: cart });
 	}
 
+	clearCart = (e: any, cart: any) => {
+		this.setState({ cartItem: cart });
+	}
+
 	public render() {
 		const {
 			cartItem
@@ -58,7 +62,7 @@ class App extends React.Component {
 		<BrowserRouter>
 			<Switch>
 				<Route exact={true} path={RouterPathEnum.HOME} component={() => <Home cart={cartItem} onEvent={(e: any, value: any) => {this.onEventHandler(e, value); }} />} />
-				<Route exact={true} path={RouterPathEnum.CHECKOUT} component={() => <Checkout cart={cartItem} />} />
+				<Route exact={true} path={RouterPathEnum.CHECKOUT} component={() => <Checkout cart={cartItem} onEvent={(e: any, value: any) => {this.clearCart(e, value); }} />} />} />
 				<Redirect to={RouterPathEnum.HOME} />
 			</Switch>
 		</BrowserRouter>

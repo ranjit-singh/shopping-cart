@@ -14,7 +14,8 @@ class Header extends React.Component<React.Props<Header>, {}> {
 
     render() {
         const {
-            cartItem
+            cartItem,
+            hidden
         } = this.props;
         return(
             <header className='header flex col-lg-12 justify-content-lg-between'>
@@ -28,10 +29,12 @@ class Header extends React.Component<React.Props<Header>, {}> {
                 </div>
                 <div className='header__right flex'>
                     <Search className='header__search-box' />
+                    {!hidden ? 
                     <Link to={ RouterPathEnum.CHECKOUT } className='header__right__shopping-cart'>
                         <CartIcon />
                         <span className='shopping-cart__count'>{cartItem.length}</span>
                     </Link>
+                    : null}
                 </div>
             </header>
         );
@@ -39,10 +42,12 @@ class Header extends React.Component<React.Props<Header>, {}> {
 }
 Header.propTypes = {
     cartItem: PropTypes.shape,
+    hidden: PropTypes.bool,
     onEvent: PropTypes.func
 };
 Header.defaultProps = {
     cartItem: [],
+    hidden: false,
     onEvent: () => {}
 };
 

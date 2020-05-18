@@ -68,7 +68,7 @@ static defaultProps: { onEvent: () => {}; cart: []; };
     return(
       <div className='container-fluid'>
         <div className="row">
-          { this.state.isSmallScreen ? <MobileHeader cartItem={cartItem} /> : <Header cartItem={cart} /> }
+          { this.state.isSmallScreen ? <MobileHeader cartItem={cart} /> : <Header cartItem={cart} /> }
           <main className="home-container">
           { this.state.isSmallScreen ? this.getMobileFilter : <Filter title={'Filters'} onEvent={this.applyFilter} /> }
             <ShoppingItem products={items} onEvent={this.setCartItem} />
