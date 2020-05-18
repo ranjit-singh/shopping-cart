@@ -1,60 +1,134 @@
-import React from 'react';
+import React, { Component } from 'react';
+import { Modal } from 'react-bootstrap';
 import PropTypes from 'prop-types';
-import Modal from 'react-bootstrap/Modal';
+import cn from 'classnames';
 
-class ModalOverlay extends React.Component {
-    static propTypes: { minValue: PropTypes.Requireable<number>; maxValue: PropTypes.Requireable<number>; };
-    static defaultProps: { minValue: null; };
-    constructor(props: Readonly<{}>) {
+class ModalBox extends Component {
+    constructor(props) {
         super(props);
         this.state = {
-            mdShow: false
+            drawerInClass: ''
         };
     }
 
-    setMdShow = (type: any) => {
-        this.setState({ mdShow: type });
+    componentWillMount() {
+        setTimeout(() => {
+            this.setState({ drawerInClass: 'in' });
+        }, 200);
     }
 
-    close = (event: any) => {
-        this.setState({ mdShow: false});
+    componentDidMount() {
+        window.addEventListener('keyup', (event) => {
+            if (event.keyCode === 27) {
+                this.props.onEvent('click');
+            }
+        });
     }
-
-    save = (event: any) => {
-        this.close();
+    componentDidUpdate() {
+        window.addEventListener('load', this.removeAttribute());
     }
-    
-    render() {
-        const {
-            mdShow
-        } = this.state;
-        const {
-            minValue,
-            maxValue
-        } = this.props;
+    getBody = () => {
+        const { children, modalBodyChildren } = this.props;
         return (
-            <Modal size='lg' show={mdShow} onHide={() => this.setMdShow(false)} onShow={() => this.setMdShow(true)}>
-                <div data-role='main' className='ui-content filter__body'>
-                        <div className='form-group' data-role='rangeslider'>
-                            <input type='range' className='form-control-range' name='price-min' id='price-min' value={minValue} min={minValue} max={maxValue} onChange={this.getMinValue} />
-                            <input type='range' name='price-max' id='price-max' value={maxValue} min={minValue} max={maxValue} onChange={this.getMaxValue} readOnly />
-                        </div>
-                        <label htmlFor='price-max'>Price</label>
-                <div className='modal-footer'>
-                    <button type='submit' className='utton button--blue' onClick={(e) => this.close(e)}>Cancel</button>
-                    <button type='submit' className='utton button--blue' onClick={(e) => this.save(e)}>Apply</button>
-                </div>
-                </div>
+            <div className={modalBodyChildren}>
+                {children}
+            </div>
+        );
+    }
+    removeAttribute = () => {
+        if (document.getElementsByClassName('modal-content').length > 0) {
+            document.getElementsByClassName('modal-content')[0].removeAttribute('role');
+        }
+    }
+
+    render() {
+        if (this.props.hidden) {
+            return null;
+        }
+
+        const { id, testId, className, ariaLabel, ariaLabelledby, ariaDescribedby, role, alt, ariaDisabled, ariaExpanded, ariaHidden, ariaInvalid, ariaHasPopup, ariaAutoComplete, tabIndex, bsClass, backdropCustomizeClass, modalBodyChildren, show } = this.props;
+
+        return (
+            <Modal
+                id={id}
+                data-id={testId}
+                role={role}
+                aria-label={ariaLabel}
+                aria-labelledby={ariaLabelledby}
+                aria-describedby={ariaDescribedby}
+                aria-disabled={ariaDisabled}
+                aria-expanded={ariaExpanded}
+                aria-invalid={ariaInvalid}
+                alt={alt}
+                aria-haspopup={ariaHasPopup}
+                aria-autocomplete={ariaAutoComplete}
+                tabIndex={tabIndex}
+                aria-hidden={ariaHidden}
+                autoFocus
+                enforceFocus
+                show={show}
+                ariaModal
+                backdropClassName={backdropCustomizeClass}
+                dialogClassName={cn(this.state.drawerInClass, className)}
+                bsClass={bsClass}
+                modalBodyChildren={modalBodyChildren}
+            >
+                <Modal.Body>
+                    {this.getBody()}
+                </Modal.Body>
             </Modal>
         );
     }
 }
-ModalOverlay.propTypes = {
-    minValue: PropTypes.number,
-    maxValue: PropTypes.number
-}
-ModalOverlay.defaultProps = {
-    minValue: null,
-    maxValue: null
-}
-export default ModalOverlay;
+
+ModalBox.propTypes = {
+    alt: PropTypes.string,
+    ariaAutoComplete: PropTypes.string,
+    ariaDescribedby: PropTypes.string,
+    ariaDisabled: PropTypes.bool,
+    ariaExpanded: PropTypes.bool,
+    ariaHasPopup: PropTypes.bool,
+    ariaHidden: PropTypes.bool,
+    ariaInvalid: PropTypes.bool,
+    ariaLabel: PropTypes.string,
+    ariaLabelledby: PropTypes.string,
+    backdropCustomizeClass: PropTypes.string,
+    bsClass: PropTypes.string,
+    children: PropTypes.node,
+    className: PropTypes.string,
+    hidden: PropTypes.bool,
+    id: PropTypes.string,
+    modalBodyChildren: PropTypes.string,
+    onEvent: PropTypes.func,
+    role: PropTypes.string,
+    show: PropTypes.bool,
+    tabIndex: PropTypes.number,
+    testId: PropTypes.string,
+};
+
+ModalBox.defaultProps = {
+    alt: null,
+    ariaAutoComplete: null,
+    ariaDescribedby: null,
+    ariaDisabled: false,
+    ariaExpanded: null,
+    ariaHasPopup: false,
+    ariaLabel: null,
+    ariaLabelledby: null,
+    ariaHidden: false,
+    ariaInvalid: false,
+    backdropCustomizeClass: 'modal-backdrop',
+    bsClass: 'modal',
+    testId: '',
+    role: null,
+    tabIndex: null,
+    children: undefined,
+    className: 'drawer-slide',
+    modalBodyChildren: 'modal-body-children',
+    id: '',
+    hidden: false,
+    show: true,
+    onEvent: () => {},
+};
+
+export default ModalBox;

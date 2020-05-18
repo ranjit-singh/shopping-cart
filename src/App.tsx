@@ -30,33 +30,35 @@ import {
 	faPlusCircle,
 	faMinusCircle,
 	faRupeeSign
-  )
+);
 import Home from './containers/home/home.component';
 import Checkout from './containers/checkout/checkout.component';
 import './styles/index.scss';
 
-interface IState {
-cartItem: any;
-}
-
-class App extends React.Component<{}, IState> {
+class App extends React.Component {
 	state: { cartItem: any; };
 	constructor(props : any){
 		super(props);
-		this.state = { 
+		this.state = {
 			cartItem: []
-		 };
+		};
+		this.onEventHandler = this.onEventHandler.bind(this);
 	}
-	onEventHandler = (eventName: any, value: any) => {
-		console.log(eventName, value);
+	onEventHandler = (e: any, item: any) => {
+		const cart = Object.assign(this.state.cartItem);
+		cart.push(item);
+		this.setState({ cartItem: cart });
 	}
 
 	public render() {
+		const {
+			cartItem
+		} = this.state;
 		return (
 		<BrowserRouter>
 			<Switch>
-				<Route exact={true} path={RouterPathEnum.HOME} component={() => <Home  onEvent={this.onEventHandler} />} />
-				<Route exact={true} path={RouterPathEnum.CHECKOUT} component={() => <Checkout cartItems={this.state.cartItem} />} />
+				<Route exact={true} path={RouterPathEnum.HOME} component={() => <Home cart={cartItem} onEvent={(e: any, value: any) => {this.onEventHandler(e, value); }} />} />
+				<Route exact={true} path={RouterPathEnum.CHECKOUT} component={() => <Checkout cart={cartItem} />} />
 				<Redirect to={RouterPathEnum.HOME} />
 			</Switch>
 		</BrowserRouter>

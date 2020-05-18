@@ -4,24 +4,22 @@ import Header from '../../components/header/header.component';
 import MobileHeader from '../../components/header/mobheader.component';
 import Filter from '../../components/filter/filter.component';
 import ShoppingItem from '../../components/shoppinglist/shoppingitem.component';
+import ModalBox from '../../components/common/modal';
 import itemList from '../../mock/cart.json';
 import './home.scss';
 
-interface IState {
-isSmallScreen: boolean;
-items: any;
-}
-
-class Home extends React.Component<{}, IState> {
-	state: { isSmallScreen: boolean; items: any; };
-  static propTypes: { onEvent: PropTypes.Requireable<(...args: any[]) => any>; };
-  static defaultProps: {};
-	constructor(props : any){
+class Home extends React.Component {
+state: { isSmallScreen: boolean; items: any; };
+static propTypes: { onEvent: any; cart: any };
+static defaultProps: { onEvent: () => {}; cart: []; };
+	constructor(props: Readonly<{}>) {
 		super(props);
 		this.state = { 
 			isSmallScreen: false,
-			items: []
-		 };
+      items: itemList.items
+    };
+     this.setCartItem = this.setCartItem.bind(this);
+     this.applyFilter = this.applyFilter.bind(this);
   }
   
   componentDidMount() {
@@ -33,20 +31,47 @@ class Home extends React.Component<{}, IState> {
 	}
 
 	private updateDimensions = () => {
-		let items = itemList.items;
-    this.setState({ isSmallScreen: window.innerWidth < 500, items });
-	}
+    this.setState({ isSmallScreen: window.innerWidth < 500 });
+  }
+
+  setCartItem = (e: any, item: any) => {
+    this.props.onEvent(e, item);
+  }
+
+  applyFilter = (filterOptions: { minValue: number; maxValue: number; }) => {
+    const { items } = this.state;
+    const filterItems = items.filter((item: { price: { actual: number; }; }) => {
+      return item.price.actual > filterOptions.minValue && item.price.actual < filterOptions.maxValue;
+    });
+    this.setState({ items: filterItems });
+  }
+  
+  getMobileFilter = () => {
+    return (
+      <ModalBox>
+        <filter
+          title={'Filter Options'}
+          onEvent={this.applyFilter}
+         />
+      </ModalBox>
+    );
+  }
 
   render() {
-    const { items } = this.state;
+    const { 
+      items,
+     } = this.state;
+     const {
+       cart
+     } = this.props;
     console.log(items);
     return(
       <div className='container-fluid'>
         <div className="row">
-          { this.state.isSmallScreen ? <MobileHeader /> : <Header /> }        
+          { this.state.isSmallScreen ? <MobileHeader cartItem={cartItem} /> : <Header cartItem={cart} /> }
           <main className="home-container">
-            <Filter />
-            <ShoppingItem products={items} />
+          { this.state.isSmallScreen ? this.getMobileFilter : <Filter title={'Filters'} onEvent={this.applyFilter} /> }
+            <ShoppingItem products={items} onEvent={this.setCartItem} />
           </main>
         </div>
       </div>
@@ -55,9 +80,11 @@ class Home extends React.Component<{}, IState> {
 }
 
 Home.propTypes = {
-  onEvent: PropTypes.func
+  onEvent: PropTypes.func,
+  cart: PropTypes.shape
 }
 Home.defaultProps = {
-  onEvent: () => {}
+  onEvent: () => {},
+  cart: []
 }
 export default Home;

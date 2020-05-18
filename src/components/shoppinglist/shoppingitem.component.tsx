@@ -3,20 +3,19 @@ import PropTypes from 'prop-types';
 import './shoppingitem.scss';
 
 class ShoppingItem extends React.Component {
-    static propTypes: { products: any; };
-    static defaultProps: { products: []; };
+    static propTypes: { products: any; onEvent: any;};
+    static defaultProps: { products: []; onEvent: () => {} };
     constructor(props: Readonly<{}>) {
         super(props);
-        this.state = {
-            cartItem: []
-        };
+        this.state = {};
+        this.addToCart = this.addToCart.bind(this);
     }
 
-    addToCart = (item: any) => {
-
+    addToCart = (event: any, item: any) => {
+        this.props.onEvent(event, item);
     }
 
-    getProductList = (products: { image: string | undefined; name: React.ReactNode; }[]) => {
+    getProductList = (products: any) => {
         const contentElm: any = [];
         products.map((item) => {
             contentElm.push(
@@ -28,16 +27,16 @@ class ShoppingItem extends React.Component {
                         <div className='s-card__title'>{item.name}</div>
                         <div className='s-card__detail flex flex-row justify-content-lg-between'>
                             <div className='s-card__price'>
-                                <span className='s-card--disprice'>&#x20B9;300</span>
-                                <span className='s-card--orgprice'><del>300</del></span>
+                                <span className='s-card--disprice'>&#x20B9;{item.price.actual}</span>
+                                <span className='s-card--orgprice'><del>{item.price.display}</del></span>
                             </div>
                             <div className='s-card__discount'>
-                                <span>64% off</span>
+                                <span>{item.discount}% off</span>
                             </div>
                         </div>
                     </div>
                     <div className='s-card__footer flex justify-center'>
-                        <button type='button' className='button button--yellow' onClick={this.addToCart(item)}>Add to Cart</button>
+                        <button type='button' className='button button--yellow' onClick={(e) => {this.addToCart(e, item)}}>Add to Cart</button>
                     </div>
                 </div>
         );
@@ -55,10 +54,12 @@ class ShoppingItem extends React.Component {
 }
 
 ShoppingItem.propTypes = {
-    products: PropTypes.shape
+    products: PropTypes.shape,
+    onClick: PropTypes.func
 };
 ShoppingItem.defaultProps = {
-    products: []
+    products: [],
+    onClick: () => {}
 };
 
 export default ShoppingItem;

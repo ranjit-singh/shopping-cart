@@ -7,8 +7,8 @@ import Header from '../../components/header/header.component';
 import './checkout.scss';
 
 class Checkout extends React.Component<RouteComponentProps<Checkout>, {}> {
-  static propTypes: { isSmallScreen: boolean; cartItems: <P extends PropTypes.ValidationMap<any>>(type: P) => PropTypes.Requireable<PropTypes.InferProps<P>>; };
-  static defaultProps: { cartItems: never[]; };
+  static propTypes: { isSmallScreen: boolean; cart: any };
+  static defaultProps: { cart: []; };
   constructor(props : RouteComponentProps<Checkout>){
     super(props);
     this.state = { 
@@ -27,11 +27,29 @@ class Checkout extends React.Component<RouteComponentProps<Checkout>, {}> {
 
 	private updateDimensions = () => {
 		this.setState({ isSmallScreen: window.innerWidth < 500 });
-	}
+  }
+  
+  getCartItem = () => {
+    const { cart } = this.props;
+    const contentElm: any = [];
+    let count = 0;
+    let newCart = cart.filter((v: { count: number; id: any; }, i: number, a: any[]) => {
+      // const result = Object.assign(v);
+      a.findIndex((t: { id: any; }, j) => {
+        if ((t.id === v.id) && j === i) {
+          v.count = count + 1;
+        }
+      });
+    });
+    console.log(contentElm, newCart);
+    
+  }
+
   render() {
     return(
       <div>
-        { this.state.isSmallScreen ? <MobileHeader /> : <Header /> } 
+        {this.state.isSmallScreen ? <MobileHeader /> : <Header />} 
+        {this.getCartItem()}
         <div className='row co-container flex flex-row'>
           <div className='col-lg-8 c-card-container'>
             
@@ -94,10 +112,10 @@ class Checkout extends React.Component<RouteComponentProps<Checkout>, {}> {
   }
 }
 Checkout.propTypes = {
-  cartItems: PropTypes.shape
+  cart: PropTypes.shape
 }
 Checkout.defaultProps = {
-  cartItems: []
+  cart: []
 }
 
 export default Checkout;
