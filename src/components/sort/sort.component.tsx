@@ -1,13 +1,14 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import ModalBox from '../common/modal';
+import { Modal } from 'react-bootstrap';
 
 class Sort extends React.Component {
     constructor(props: Readonly<{}>) {
         super(props);
         this.state = {
-            sortType: ''
+            sortType: '',
+            showModal: false
         };
         this.sortList = [
             {
@@ -41,12 +42,30 @@ class Sort extends React.Component {
         return contentElm;
     }
 
+    setSmShow = (flag) => {
+        this.setState({ showModal: flag });
+    }
+
     getSortingModal = () => {
-        <ModalBox show={true}>
-            <ul className='card-sort__items flex flex-row' >
-                {this.getSortElement()}
-            </ul>
-        </ModalBox>
+        return(
+            <Modal
+                size="sm"
+                show={true}
+                onHide={() => this.setSmShow(false)}
+                aria-labelledby="example-modal-sizes-title-sm"
+            >
+            <Modal.Header closeButton>
+            <Modal.Title id="sorting-custom-modal-styling-title">
+                Sort Options
+            </Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+                <ul className='card-sort__items flex flex-row'>
+                    {this.getSortElement()}
+                </ul>
+            </Modal.Body>
+            </Modal>
+        );
     }
 
     getFilterModal = () => {
@@ -63,7 +82,7 @@ class Sort extends React.Component {
                     </ul>
                 </div>
                 <div className='card-sort-mob row'>
-                    <div className='col-sm-6 col-6' onClick={() => {this.getSortingModal();}}>
+                    <div className='col-sm-6 col-6' onClick={() => {this.setSmShow(true);}}>
                         <FontAwesomeIcon 
                             icon={['fas', 'sort']}
                             size='1x'
@@ -77,6 +96,7 @@ class Sort extends React.Component {
                         />
                         <span>Filter</span>
                     </div>
+                    {this.state.showModal ? this.getSortingModal() : null }
                 </div>
             </div>
             
