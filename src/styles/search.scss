@@ -10,16 +10,19 @@
         color: $color-white;
         line-height: 28px;
     }
-    input::-webkit-input-placeholder { /* Edge */
+    input::-webkit-input-placeholder {
         color: $color-white;
+        opacity: 1;
       }
       
-      input:-ms-input-placeholder { /* Internet Explorer */
+      input:-ms-input-placeholder {
         color: $color-white;
+        opacity: 1;
       }
       
       input::placeholder {
         color: $color-white;
+        opacity: 1;
       }
       input:-internal-autofill-selected {
         background-color: transparent;

@@ -6,6 +6,7 @@ import { RouterPathEnum } from '../../enums/RouterPathEnum';
 import MobileHeader from '../../components/header/mobheader.component';
 import Header from '../../components/header/header.component';
 import './checkout.scss';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 class Checkout extends React.Component<RouteComponentProps<Checkout>, {}> {
   static propTypes: { isSmallScreen: boolean; cart: any };
@@ -73,14 +74,14 @@ class Checkout extends React.Component<RouteComponentProps<Checkout>, {}> {
     const contentElm: any = [];
     cartItem.map((item: any) => {
       contentElm.push(
-        <div className='c-card flex flex-row row'>
-            <div className='c-card-header col-lg-2 flex'>
+        <div className='c-card'>
+            <div className='c-card__header col-xl-2 col-lg-2 col-md-4 col-sm-4 col-5 flex'>
                 <img src={item.image} className='card-img-top' />
             </div>
-            <div className='c-card__body col-lg-7 flex flex-row'>
-            <div className='col-lg-6'>
-                <div className='c-card__title'>{item.name}</div>
-                  <div className='c-card__detail flex flex-row justify-content-lg-start'>
+            <div className='c-card__body col-xl-10 col-lg-10 col-md-8 col-sm-8 col-7'>
+              <div className='col-xl-4 col-lg-5 col-md-12 col-sm-12 col-12'>
+                  <div className='c-card__title text-ellipsis'>{item.name}</div>
+                  <div className='c-card__detail flex flex-row justify-content-xl-start'>
                     <div className='c-card__price'>
                         <span className='c-card--disprice'>&#x20B9;{item.price.actual}</span>
                         <span className='c-card--orgprice'><del>{item.price.display}</del></span>
@@ -88,16 +89,20 @@ class Checkout extends React.Component<RouteComponentProps<Checkout>, {}> {
                     <div className='c-card__discount'>
                         <span>{item.discount}% off</span>
                     </div>
+                  </div>
+              </div>
+              <div className='col-xl-5 col-lg-5 col-md-12 col-sm-12 col-12 c-card__quantity'>
+                <div className='c-card__quantity--remove' onClick={() => {this.removeItem(item, false);}}>
+                  <span>-</span>
                 </div>
-            </div>
-            <div className='col-lg-6 flex align-items-center c-card__quantity'>
-              <div className='c-card__quantity--remove' onClick={() => {this.removeItem(item, false);}}>-</div>
-              <input type='text' className='c-card__quantity--count' value={item.count} />
-              <div className='c-card__quantity--add' onClick={() => {this.addItem(item);}}>+</div>
-            </div>
-            </div>
-            <div className='c-card__footer flex justify-center col-lg-3'>
-                <button type='button' className='button button-transparent' onClick={() => {this.removeItem(item, true);}}>REMOVE</button>
+                <input type='text' className='c-card__quantity--count' value={item.count} />
+                <div className='c-card__quantity--add' onClick={() => {this.addItem(item);}}>
+                  <span>+</span>
+                </div>
+              </div>
+              <div className='c-card__footer flex justify-center col-xl-3 col-lg-2 col-md-12 col-sm-12 col-12'>
+                  <button type='button' className='button button-transparent' onClick={() => {this.removeItem(item, true);}}>REMOVE</button>
+              </div>
             </div>
           </div>
       );
@@ -116,27 +121,29 @@ class Checkout extends React.Component<RouteComponentProps<Checkout>, {}> {
     });
     total = subTotal - discountTotal;
     return (
-      <div className='col-lg-2'>
-            <h3>PRICE DETAILS</h3>
-            <div>
-              <div>
-                <span>Price({cartItem.length} item)</span>
-                <span>:</span>
-                <span>&#8377;{subTotal}</span>
-              </div>
-              <div>
-                <span>Discount</span>
-                <span>:</span>
-                <span>&#8377;{discountTotal}</span>
-              </div>
+      <div className='c-sum-container'>
+        <div className='c-sum'>
+          <h3 className='c-sum__title'>PRICE DETAILS</h3>
+          <div className='c-sum__detail'>
+            <div className='c-sum__detail--item'>
+              <span>Price({cartItem.length} item)</span>
+              <span>&nbsp;:&nbsp;</span>
+              <span>&#8377;{subTotal}</span>
             </div>
-            <div>
-            <div>
-                <span>Total Payable</span>
-                <span>&#8377;{total}</span>
-              </div>
+            <div className='c-sum__detail--item'>
+              <span>Discount</span>
+              <span>&nbsp;:&nbsp;</span>
+              <span>&#8377;{discountTotal}</span>
             </div>
           </div>
+          <div>
+          <div className='c-sum__total'>
+              <span>Total Payable</span>
+              <span>&#8377;{total}</span>
+            </div>
+          </div>
+        </div>
+      </div>
     );
   }
 
@@ -144,8 +151,8 @@ class Checkout extends React.Component<RouteComponentProps<Checkout>, {}> {
     return(
       <div>
         {this.state.isSmallScreen ? <MobileHeader hidden= {true} /> : <Header hidden= {true} />} 
-        <div className='row co-container flex flex-row'>
-          <div className='col-lg-8 c-card-container'>
+        <div className='co-container'>
+          <div className='c-card-container'>
             {this.getCartItem()}
           </div>
           {this.state.cartItem.length > 0 ? this.getPrice() : null}

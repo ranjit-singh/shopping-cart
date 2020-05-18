@@ -44,7 +44,7 @@
         height: 180px;
     }
     &__title {
-        font-size: 16px;
+        font-size: 14px;
         padding: 8px 0;
         color: $color-titlegrey;
     }
@@ -58,7 +58,7 @@
         color: $color-fontgrey;
     }
     &--orgprice {
-        font-size: 13px;
+        font-size: 12px;
         color: $color-grey;
     }
     &--disprice + &--orgprice {
