@@ -9,6 +9,7 @@
         outline: none;
         color: $color-white;
         line-height: 28px;
+        width: 200px;
     }
     input::-webkit-input-placeholder {
         color: $color-white;
@@ -56,4 +57,11 @@
         right: 5px;
         bottom: 13px;
     }
+}
+@media only screen and (max-width: 767px) {
+  .search-box {
+    input[type="search"], input[type="text"] {
+      width: 180px;
+    }
+  }
 }

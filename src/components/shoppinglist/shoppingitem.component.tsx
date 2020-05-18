@@ -55,7 +55,7 @@ class ShoppingItem extends React.Component {
                                 <span className='s-card--disprice'>&#x20B9;{item.price.actual}</span>
                                 <span className='s-card--orgprice'><del>{item.price.display}</del></span>
                             </div>
-                            <div className='s-card__discount'>
+                            <div className='s-card--discount'>
                                 <span>{item.discount}% off</span>
                             </div>
                         </div>
