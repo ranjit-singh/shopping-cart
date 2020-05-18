@@ -1,5 +1,6 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
+import Sort from '../sort/sort.component';
 import './shoppingitem.scss';
 
 class ShoppingItem extends React.Component {
@@ -7,17 +8,41 @@ class ShoppingItem extends React.Component {
     static defaultProps: { products: []; onEvent: () => {} };
     constructor(props: Readonly<{}>) {
         super(props);
-        this.state = {};
+        this.state = {
+            products: this.props.products
+        };
         this.addToCart = this.addToCart.bind(this);
+    }
+
+    updateState = (props: any) => {
+        this.setState({ products: props.products });
+    }
+
+    componentWillReceiveProps = (nextProps: any) => {
+        if (nextProps.products !== this.props.products) {
+            this.updateState(nextProps);
+        }
     }
 
     addToCart = (event: any, item: any) => {
         this.props.onEvent(event, item);
     }
 
+    SortBy = (type: string) => {
+        const newProducts = Object.assign(this.state.products);
+        if (type === 'high') {
+            newProducts.sort((a: { price: { actual: string; }; }, b: { price: { actual: string; }; }) => parseFloat(b.price.actual) - parseFloat(a.price.actual));
+        } else if (type === 'low') {
+            newProducts.sort((a: { price: { actual: string; }; }, b: { price: { actual: string; }; }) => parseFloat(a.price.actual) - parseFloat(b.price.actual));
+        } else {
+            newProducts.sort((a: { discount: string; }, b: { discount: string; }) => parseFloat(b.discount) - parseFloat(a.discount));
+        }
+        this.setState({ products: newProducts });
+    }
+
     getProductList = (products: any) => {
         const contentElm: any = [];
-        products.map((item) => {
+        products.map((item: { image: string | undefined; name: React.ReactNode; price: { actual: React.ReactNode; display: React.ReactNode; }; discount: React.ReactNode; }) => {
             contentElm.push(
                 <div className='s-card flex flex-column'>
                     <div className='s-card-header'>
@@ -44,17 +69,10 @@ class ShoppingItem extends React.Component {
         return contentElm;
     }
         render() {
-            const { products } = this.props;
+            const { products } = this.state;
             return (
                 <div className='main-container flex flex-column'>
-                    <div className='card-sort flex flex-row'>
-                        <h4 className='card-sort__title'>Sort By</h4>
-                        <ul className='card-sort__items flex flex-row' >
-                            <li className='card-sort--item active'>Price -- High Low</li>
-                            <li className='card-sort--item'>Price -- Low High</li>
-                            <li className='card-sort--item'>Discount</li>
-                        </ul>
-                    </div>
+                    <Sort onEvent={(type) => {this.SortBy(type);}} />
                     <div className='card-container'>
                         {this.getProductList(products)}
                     </div>

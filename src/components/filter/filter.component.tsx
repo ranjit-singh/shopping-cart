@@ -1,5 +1,6 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
+import ReactSlider from 'react-slider';
 import './filter.scss';
 
 class Filter extends React.Component {
@@ -12,12 +13,9 @@ class Filter extends React.Component {
         this.applyFilter = this.applyFilter.bind(this);
     }
 
-    getMinValue = (event: any) => {
-        this.setState({ minValue: event.target.value });
-    }
-
-    getMaxValue = (event: any) => {
-        this.setState({ maxValue: event.target.value });
+    onChange = (value: any) => {
+        console.log(value);
+        this.setState({ minValue: value[0], maxValue: value[1] });
     }
 
     applyFilter = () => {
@@ -27,27 +25,50 @@ class Filter extends React.Component {
         this.props.onEvent(filter);
     }
 
+    getNormalSlider = () => {
+        const contentElm: any = [];
+        const {
+            minValue,
+            maxValue
+        } = this.props;
+        contentElm.push(
+            <div className='filter__body'>
+                <div className='form-group'>
+                    <span className='rangeslider--rupeesymbol'>&#8377;</span>
+                    <ReactSlider
+                        min={minValue}
+                        max={maxValue}
+                        className="horizontal-slider"
+                        thumbClassName="example-thumb"
+                        trackClassName="example-track"
+                        defaultValue={[minValue, maxValue]}
+                        ariaLabel={['Lower thumb', 'Upper thumb']}
+                        ariaValuetext={state => `Thumb value ${state.valueNow}`}
+                        renderThumb={(props, state) => <div {...props}>{state.valueNow}</div>}
+                        pearling
+                        minDistance={10}
+                        onChange={this.onChange}
+                    />
+                    <span className='rangeslider--rupeesymbol'>&#8377;</span>
+                </div>
+                <label htmlFor='price-max'className='rangeslider__label'>Price</label>
+                <button type='submit' className='button button--blue' onClick={this.applyFilter}>Apply</button>
+            </div>
+        );
+        return contentElm;
+    }
+
         render() {
             const {
-                minValue,
-                maxValue,
-                title
+                title,
+                isJquerySlider
             } = this.props;
             return (
                 <div className='filter d-none d-sm-none d-md-block d-lg-block d-xl-block'>
                     <div className='filter__header'>
                         <h4>{title}</h4>
                     </div>
-                    <div data-role='main' className='ui-content filter__body'>
-                        <div className='form-group' data-role='rangeslider'>
-                            <span className='rangeslider--rupeesymbol' name='min-price'>&#8377;</span>
-                            <input type='range' className='form-control-range' name='price-min' id='price-min' value={minValue} min={minValue} max={maxValue} onKeyPress={this.getMinValue} onChange={this.getMinValue} readOnly />
-                            <span className='rangeslider--rupeesymbol' name='max-price'>&#8377;</span>
-                            <input type='range' name='price-max' id='price-max' value={maxValue} min={minValue} max={maxValue} onKeyPress={this.getMaxValue} onChange={this.getMaxValue} readOnly />
-                        </div>
-                        <label htmlFor='price-max'className='rangeslider__label'>Price</label>
-                        <button type='submit' className='button button--blue' onClick={this.applyFilter}>Apply</button>
-                    </div>
+                    {this.getNormalSlider()}
                 </div>
             );
         }
@@ -60,7 +81,7 @@ Filter.propTypes = {
 };
 Filter.defaultProps = {
     minValue: 100,
-    maxValue: 1000,
+    maxValue: 10000,
     title: '',
     onEvent: () => {}
 };

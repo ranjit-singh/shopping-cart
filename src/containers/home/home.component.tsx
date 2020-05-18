@@ -1,7 +1,6 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
 import Header from '../../components/header/header.component';
-import MobileHeader from '../../components/header/mobheader.component';
 import Filter from '../../components/filter/filter.component';
 import ShoppingItem from '../../components/shoppinglist/shoppingitem.component';
 import ModalBox from '../../components/common/modal';
@@ -39,7 +38,7 @@ static defaultProps: { onEvent: () => {}; cart: []; };
   }
 
   applyFilter = (filterOptions: { minValue: number; maxValue: number; }) => {
-    const { items } = this.state;
+    const items = Object.assign(itemList.items);
     const filterItems = items.filter((item: { price: { actual: number; }; }) => {
       return item.price.actual > filterOptions.minValue && item.price.actual < filterOptions.maxValue;
     });
@@ -59,18 +58,17 @@ static defaultProps: { onEvent: () => {}; cart: []; };
 
   render() {
     const { 
-      items,
+      items
      } = this.state;
      const {
        cart
      } = this.props;
-    console.log(items);
     return(
       <div className='container-fluid'>
-        <div className="row">
-          { this.state.isSmallScreen ? <MobileHeader cartItem={cart} /> : <Header cartItem={cart} /> }
-          <main className="home-container">
-          { this.state.isSmallScreen ? this.getMobileFilter : <Filter title={'Filters'} onEvent={this.applyFilter} /> }
+        <div className='row'>
+          <Header cartItem={cart} /> }
+          <main className='home-container'>
+            <Filter title={'Filters'} onEvent={this.applyFilter} /> }
             <ShoppingItem products={items} onEvent={this.setCartItem} />
           </main>
         </div>

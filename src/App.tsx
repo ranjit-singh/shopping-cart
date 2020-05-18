@@ -34,6 +34,7 @@ import {
 import Home from './containers/home/home.component';
 import Checkout from './containers/checkout/checkout.component';
 import './styles/index.scss';
+import { isEmpty } from 'lodash';
 
 class App extends React.Component {
 	state: { cartItem: any; };
@@ -44,6 +45,7 @@ class App extends React.Component {
 		};
 		this.onEventHandler = this.onEventHandler.bind(this);
 	}
+
 	onEventHandler = (e: any, item: any) => {
 		const cart = Object.assign(this.state.cartItem);
 		cart.push(item);
