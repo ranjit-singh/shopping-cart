@@ -57,6 +57,7 @@ static defaultProps: { onEvent: () => {}; cart: []; };
             <Filter title={'Filters'} onEvent={this.applyFilter} />
             <ShoppingItem products={items} onEvent={this.setCartItem} />
           </main>
+          <footer className='footer'>&copy;copyright</footer>
         </div>
       </div>
     );

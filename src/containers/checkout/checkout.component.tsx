@@ -3,34 +3,19 @@ import PropTypes from 'prop-types';
 import { RouteComponentProps } from 'react-router';
 import { findIndex, isEmpty } from 'lodash';
 import { RouterPathEnum } from '../../enums/RouterPathEnum';
-import MobileHeader from '../../components/header/mobheader.component';
 import Header from '../../components/header/header.component';
 import removeDuplicateItemAddCount from '../../utils/removeDuplicateItemAddCount';
 import './checkout.scss';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import './../home/home.scss';
 
 class Checkout extends React.Component<RouteComponentProps<Checkout>, {}> {
-  static propTypes: { isSmallScreen: boolean; cart: any };
+  static propTypes: { cart: any };
   static defaultProps: { cart: []; onEvent: () => {}; };
   constructor(props : RouteComponentProps<Checkout>){
     super(props);
     this.state = { 
-      isSmallScreen: false,
       cartItem: removeDuplicateItemAddCount(this.props.cart)
 		 };
-  }
-  
-  componentDidMount() {
-		window.addEventListener('resize', this.updateDimensions);
-
-		this.updateDimensions();
-	}
-	componentWillUnmount() {
-		window.removeEventListener('resize', this.updateDimensions);
-	}
-
-	private updateDimensions = () => {
-		this.setState({ isSmallScreen: window.innerWidth < 500 });
   }
 
   addItem = (item: any) => {
@@ -141,13 +126,14 @@ class Checkout extends React.Component<RouteComponentProps<Checkout>, {}> {
   render() {
     return(
       <div>
-        {this.state.isSmallScreen ? <MobileHeader hidden= {true} /> : <Header hidden= {true} />} 
+        <Header hidden= {true} />
         <div className='co-container'>
           <div className='c-card-container'>
             {this.getCartItem()}
           </div>
           {this.state.cartItem.length > 0 ? this.getPrice() : null}
         </div>
+        <footer className='footer'>&copy;copyright</footer>
       </div>
     );
   }

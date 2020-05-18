@@ -49,7 +49,7 @@ class ShoppingItem extends React.Component {
                         <img src={item.image} className='card-img-top' />
                     </div>
                     <div className='s-card__body'>
-                        <div className='s-card__title'>{item.name}</div>
+                        <div className='s-card__title text-ellipsis'>{item.name}</div>
                         <div className='s-card__detail flex flex-row'>
                             <div className='s-card__price'>
                                 <span className='s-card--disprice'>&#x20B9;{item.price.actual}</span>
