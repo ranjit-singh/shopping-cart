@@ -1,14 +1,46 @@
 @import '../../styles/index.scss';
 
+
+.main-container {
+    padding-left: 208px;
+    .card-sort {
+        padding: 20px 20px 20px 0;
+        .card-sort__title {
+            color: $color-fontgrey;
+            font-size: 20px;
+            line-height: 22px;
+            margin: 0;
+            padding-left: 8px;
+        }
+        .card-sort__items {
+            margin: 0;
+            padding-left: 30px;
+            .card-sort--item {
+                color: $color-grey;
+                font-size: 14px;
+                font-weight: 600;
+                list-style-type: none;
+                margin-right: 30px;
+                line-height: 22px;
+                cursor: pointer;
+                &.active {
+                    color: $color-blue;
+                }
+            }
+        }
+    }
+}
 .card-container {
-    padding-left: 250px;
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
 }
 .s-card {
     padding: 8px;
     width: 20%;
     img {
         width: 100%;
-        height: 300px;
+        height: 180px;
     }
     &__title {
         font-size: 16px;
@@ -18,6 +50,8 @@
     &__detail {
         font-size: 14px;
         font-weight: 600;
+        display: flex;
+        justify-content: space-between;
     }
     &--disprice {
         color: $color-fontgrey;
@@ -35,5 +69,19 @@
     }
     &__footer {
         padding: 26px 0;
+    }
+}
+
+@media only screen and (max-width: 992px) {
+    .s-card {
+        width: 33.33%;
+    }
+}
+@media only screen and (max-width: 767px) {
+    .s-card {
+        width: 50%;
+    }
+    .main-container {
+        padding-left: 0;
     }
 }

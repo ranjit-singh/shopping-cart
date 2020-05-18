@@ -5,7 +5,28 @@
         border-bottom: 1px solid $color-white !important;
         background-color: transparent;
         border-radius: 0;
-        padding: 0 50px 0 0;
+        padding: 0 50px 0 4px;
+        outline: none;
+        color: $color-white;
+        line-height: 28px;
+    }
+    input::-webkit-input-placeholder { /* Edge */
+        color: $color-white;
+      }
+      
+      input:-ms-input-placeholder { /* Internet Explorer */
+        color: $color-white;
+      }
+      
+      input::placeholder {
+        color: $color-white;
+      }
+      input:-internal-autofill-selected {
+        background-color: transparent;
+      }
+    input:-webkit-autofill, input:-webkit-autofill:hover, input:-webkit-autofill:focus {
+        -webkit-text-fill-color: $color-white;
+        transition: background-color 5000s ease-in-out 0s;
     }
     > div {
         background-color: transparent !important;

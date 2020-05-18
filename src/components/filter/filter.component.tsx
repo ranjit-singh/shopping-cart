@@ -34,7 +34,7 @@ class Filter extends React.Component {
                 title
             } = this.props;
             return (
-                <div className='filter'>
+                <div className='filter d-none d-sm-none d-md-block d-lg-block d-xl-block'>
                     <div className='filter__header'>
                         <h4>{title}</h4>
                     </div>

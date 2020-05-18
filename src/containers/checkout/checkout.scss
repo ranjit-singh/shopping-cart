@@ -25,6 +25,7 @@
         font-size: 14px;
         font-weight: 600;
         margin-top: 10px;
+        justify-content: flex-start;
     }
     &--disprice {
         color: $color-fontgrey;
@@ -41,6 +42,8 @@
         color: $color-green;
     }
     &__quantity {
+        align-items: center;
+        display: flex;
         &--remove, &--add, &--count {
             border: 1px solid $color-darkgrey;
             margin: 8px;
@@ -72,5 +75,7 @@
     }
     &__footer {
         padding: 26px 0;
+        display: flex;
+        justify-content: center;
     }
 }

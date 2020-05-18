@@ -17,7 +17,7 @@ class Header extends React.Component<React.Props<Header>, {}> {
             cartItem
         } = this.props;
         return(
-            <header className='header flex col-lg-12 justify-content-lg-between'>
+            <header className='header flex'>
                 <div className='header__logo'>
                     <Link to={ RouterPathEnum.HOME }>
                         <FontAwesomeIcon

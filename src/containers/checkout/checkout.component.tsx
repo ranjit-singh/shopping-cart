@@ -60,7 +60,7 @@ class Checkout extends React.Component<RouteComponentProps<Checkout>, {}> {
               <div className='c-card__body col-lg-7 flex flex-row'>
               <div className='col-lg-6'>
                   <div className='c-card__title'>{'item.name'}</div>
-                    <div className='c-card__detail flex flex-row justify-content-lg-start'>
+                    <div className='c-card__detail flex flex-row'>
                       <div className='c-card__price'>
                           <span className='c-card--disprice'>&#x20B9;300</span>
                           <span className='c-card--orgprice'><del>300</del></span>
@@ -70,13 +70,13 @@ class Checkout extends React.Component<RouteComponentProps<Checkout>, {}> {
                       </div>
                   </div>
               </div>
-              <div className='col-lg-6 flex align-items-center c-card__quantity'>
+              <div className='col-lg-6 c-card__quantity'>
                 <div className='c-card__quantity--remove'>-</div>
                 <input type="text" className='c-card__quantity--count' />
                 <div className='c-card__quantity--add'>+</div>
               </div>
               </div>
-              <div className='c-card__footer flex justify-center col-lg-3'>
+              <div className='c-card__footer col-lg-3'>
                   <button type="button" className='button button-transparent'>REMOVE</button>
               </div>
             </div>
