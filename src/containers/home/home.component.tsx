@@ -68,7 +68,7 @@ static defaultProps: { onEvent: () => {}; cart: []; };
         <div className='row'>
           <Header cartItem={cart} /> }
           <main className='home-container'>
-            <Filter title={'Filters'} onEvent={this.applyFilter} /> }
+            <Filter title={'Filters'} onEvent={this.applyFilter} />
             <ShoppingItem products={items} onEvent={this.setCartItem} />
           </main>
         </div>

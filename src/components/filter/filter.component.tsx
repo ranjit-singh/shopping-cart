@@ -38,9 +38,9 @@ class Filter extends React.Component {
                     <ReactSlider
                         min={minValue}
                         max={maxValue}
-                        className="horizontal-slider"
-                        thumbClassName="example-thumb"
-                        trackClassName="example-track"
+                        className="horizontal-range-slider"
+                        thumbClassName="slider-thumb"
+                        trackClassName="slider-track"
                         defaultValue={[minValue, maxValue]}
                         ariaLabel={['Lower thumb', 'Upper thumb']}
                         ariaValuetext={state => `Thumb value ${state.valueNow}`}
