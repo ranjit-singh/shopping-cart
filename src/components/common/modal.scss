@@ -1,0 +1,20 @@
+@import '../../styles/index.scss';
+
+.modal {
+    .modal-header {
+        border-radius: 0;
+        padding: 15px 15px 10px;
+        border: none;
+        .modal-title, .modal-title.h4 {
+            height: auto;
+            font-size: 18px;
+            color: $color-fontgrey;
+        }
+    }
+    .modal-content {
+        border-radius: 0;
+    }
+    .modal-body {
+        padding: 10px 15px 15px;
+    }
+}
