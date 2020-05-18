@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Modal } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 import cn from 'classnames';
+import './modal.scss';
 
 class ModalBox extends Component {
     constructor(props: Readonly<{}>) {

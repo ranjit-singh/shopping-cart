@@ -2,6 +2,7 @@ import * as React from 'react';
 import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Modal, Button } from 'react-bootstrap';
+import './sort.scss';
 
 class Sort extends React.Component {
     constructor(props: Readonly<{}>) {
@@ -31,6 +32,22 @@ class Sort extends React.Component {
         this.props.onEvent('sorting', elmObj.key);
     }
 
+    getSortRadioElement = () => {
+        const contentElm: any = [];
+        this.sortList.forEach((elm: { name: React.ReactNode; }) => {
+            const selectedClass = elm.key === this.state.sortType ? 'card-sort--item active' : 'card-sort--item';
+            contentElm.push(
+                <li className={selectedClass} onClick={() => {this.applySorting(elm);} } >
+                    <label className='radiobox'>{elm.name}
+                        <input type='radio' name='radio' />
+                        <span className='radio--checked'></span>
+                    </label>
+                </li>
+        );
+        });
+        return contentElm;
+    }
+
     getSortElement = () => {
         const contentElm: any = [];
         this.sortList.forEach((elm: { name: React.ReactNode; }) => {
@@ -58,8 +75,8 @@ class Sort extends React.Component {
                 <div className='filter-mobile__header'>
                     <h3>Sorting Options</h3>
                 </div>
-                <ul className='card-sort__items flex flex-row'>
-                    {this.getSortElement()}
+                <ul className='m-card-sort__items flex flex-column'>
+                    {this.getSortRadioElement()}
                 </ul>
             </Modal.Body>
             <Modal.Footer>
