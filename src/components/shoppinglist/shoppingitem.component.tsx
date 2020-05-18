@@ -7,12 +7,18 @@ class ShoppingItem extends React.Component {
     static defaultProps: { products: []; };
     constructor(props: Readonly<{}>) {
         super(props);
-        this.state = {};
+        this.state = {
+            cartItem: []
+        };
     }
 
-    getProductList = (products) => {
-        const contentElm = [];
-        products.map((item: { image: string | undefined; name: React.ReactNode; }) => {
+    addToCart = (item: any) => {
+
+    }
+
+    getProductList = (products: { image: string | undefined; name: React.ReactNode; }[]) => {
+        const contentElm: any = [];
+        products.map((item) => {
             contentElm.push(
                 <div className='s-card flex flex-column'>
                     <div className='s-card-header'>
@@ -31,11 +37,11 @@ class ShoppingItem extends React.Component {
                         </div>
                     </div>
                     <div className='s-card__footer flex justify-center'>
-                        <button type="button" className='button button--yellow'>Add to Cart</button>
+                        <button type='button' className='button button--yellow' onClick={this.addToCart(item)}>Add to Cart</button>
                     </div>
                 </div>
         );
-        })
+        });
         return contentElm;
     }
         render() {
@@ -50,9 +56,9 @@ class ShoppingItem extends React.Component {
 
 ShoppingItem.propTypes = {
     products: PropTypes.shape
-}
+};
 ShoppingItem.defaultProps = {
     products: []
-}
+};
 
 export default ShoppingItem;

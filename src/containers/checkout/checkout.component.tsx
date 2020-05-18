@@ -4,6 +4,7 @@ import { RouteComponentProps } from 'react-router';
 import { RouterPathEnum } from '../../enums/RouterPathEnum';
 import MobileHeader from '../../components/header/mobheader.component';
 import Header from '../../components/header/header.component';
+import './checkout.scss';
 
 class Checkout extends React.Component<RouteComponentProps<Checkout>, {}> {
   static propTypes: { isSmallScreen: boolean; cartItems: <P extends PropTypes.ValidationMap<any>>(type: P) => PropTypes.Requireable<PropTypes.InferProps<P>>; };
@@ -31,9 +32,59 @@ class Checkout extends React.Component<RouteComponentProps<Checkout>, {}> {
     return(
       <div>
         { this.state.isSmallScreen ? <MobileHeader /> : <Header /> } 
-        <button onClick={ ( e: any ) => this.onClickMove( RouterPathEnum.CHECKOUT ) }>
-            go CHECKOUT
-        </button>
+        <div className='row co-container flex flex-row'>
+          <div className='col-lg-8 c-card-container'>
+            
+            <div className='c-card flex flex-row row'>
+              <div className='c-card-header col-lg-2 flex'>
+                  <img src='{item.image}' className='card-img-top' />
+              </div>
+              <div className='c-card__body col-lg-7 flex flex-row'>
+              <div className='col-lg-6'>
+                  <div className='c-card__title'>{'item.name'}</div>
+                    <div className='c-card__detail flex flex-row justify-content-lg-start'>
+                      <div className='c-card__price'>
+                          <span className='c-card--disprice'>&#x20B9;300</span>
+                          <span className='c-card--orgprice'><del>300</del></span>
+                      </div>
+                      <div className='c-card__discount'>
+                          <span>64% off</span>
+                      </div>
+                  </div>
+              </div>
+              <div className='col-lg-6 flex align-items-center c-card__quantity'>
+                <div className='c-card__quantity--remove'>-</div>
+                <input type="text" className='c-card__quantity--count' />
+                <div className='c-card__quantity--add'>+</div>
+              </div>
+              </div>
+              <div className='c-card__footer flex justify-center col-lg-3'>
+                  <button type="button" className='button button-transparent'>REMOVE</button>
+              </div>
+            </div>
+          </div>
+          <div className='col-lg-2'>
+            <h3>PRICE DETAILS</h3>
+            <div>
+              <div>
+                <span>Price(1 item)</span>
+                <span>:</span>
+                <span>&#8377;900</span>
+              </div>
+              <div>
+                <span>Discount</span>
+                <span>:</span>
+                <span>&#8377;579</span>
+              </div>
+            </div>
+            <div>
+            <div>
+                <span>Total Payable</span>
+                <span>&#8377;319</span>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     );
   }
