@@ -9,7 +9,7 @@ super(props);
 render() {
 return(
     <div className='search-box'>
-        <input type='search' name='search' />
+        <input type='search' name='search' placeholder='Search' />
         <FontAwesomeIcon
             icon={['fas', 'search']}
             size='1x'
