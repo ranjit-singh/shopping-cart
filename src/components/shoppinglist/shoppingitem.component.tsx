@@ -14,25 +14,35 @@ class ShoppingItem extends React.Component {
         this.addToCart = this.addToCart.bind(this);
     }
 
+    updateState = (props: any) => {
+        this.setState({ products: props.products });
+    }
+
+    componentWillReceiveProps = (nextProps: any) => {
+        if (nextProps.products !== this.props.products) {
+            this.updateState(nextProps);
+        }
+    }
+
     addToCart = (event: any, item: any) => {
         this.props.onEvent(event, item);
     }
 
-    SortBy = (type) => {
+    SortBy = (type: string) => {
         const newProducts = Object.assign(this.state.products);
         if (type === 'high') {
-            newProducts.sort((a, b) => parseFloat(b.price.actual) - parseFloat(a.price.actual));
+            newProducts.sort((a: { price: { actual: string; }; }, b: { price: { actual: string; }; }) => parseFloat(b.price.actual) - parseFloat(a.price.actual));
         } else if (type === 'low') {
-            newProducts.sort((a, b) => parseFloat(a.price.actual) - parseFloat(b.price.actual));
+            newProducts.sort((a: { price: { actual: string; }; }, b: { price: { actual: string; }; }) => parseFloat(a.price.actual) - parseFloat(b.price.actual));
         } else {
-            newProducts.sort((a, b) => parseFloat(b.discount) - parseFloat(a.discount));
+            newProducts.sort((a: { discount: string; }, b: { discount: string; }) => parseFloat(b.discount) - parseFloat(a.discount));
         }
         this.setState({ products: newProducts });
     }
 
     getProductList = (products: any) => {
         const contentElm: any = [];
-        products.map((item) => {
+        products.map((item: { image: string | undefined; name: React.ReactNode; price: { actual: React.ReactNode; display: React.ReactNode; }; discount: React.ReactNode; }) => {
             contentElm.push(
                 <div className='s-card flex flex-column'>
                     <div className='s-card-header'>
@@ -69,9 +79,6 @@ class ShoppingItem extends React.Component {
                 </div>
             );
         }
-    SortBy() {
-        throw new Error("Method not implemented.");
-    }
 }
 
 ShoppingItem.propTypes = {

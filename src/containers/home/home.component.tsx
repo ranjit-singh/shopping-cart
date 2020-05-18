@@ -39,7 +39,7 @@ static defaultProps: { onEvent: () => {}; cart: []; };
   }
 
   applyFilter = (filterOptions: { minValue: number; maxValue: number; }) => {
-    const { items } = this.state;
+    const items = Object.assign(itemList.items);
     const filterItems = items.filter((item: { price: { actual: number; }; }) => {
       return item.price.actual > filterOptions.minValue && item.price.actual < filterOptions.maxValue;
     });
@@ -59,7 +59,7 @@ static defaultProps: { onEvent: () => {}; cart: []; };
 
   render() {
     const { 
-      items,
+      items
      } = this.state;
      const {
        cart
