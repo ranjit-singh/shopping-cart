@@ -1,5 +1,7 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import ModalBox from '../common/modal';
 
 class Sort extends React.Component {
     constructor(props: Readonly<{}>) {
@@ -39,14 +41,45 @@ class Sort extends React.Component {
         return contentElm;
     }
 
+    getSortingModal = () => {
+        <ModalBox show={true}>
+            <ul className='card-sort__items flex flex-row' >
+                {this.getSortElement()}
+            </ul>
+        </ModalBox>
+    }
+
+    getFilterModal = () => {
+        return null;
+    }
+
     render () {
         return (
-            <div className='card-sort flex flex-row'>
-                <h4 className='card-sort__title'>Sort By</h4>
-                <ul className='card-sort__items flex flex-row' >
-                    {this.getSortElement()}
-                </ul>
+            <div>
+                <div className='card-sort flex flex-row'>
+                    <h4 className='card-sort__title'>Sort By</h4>
+                    <ul className='card-sort__items flex flex-row' >
+                        {this.getSortElement()}
+                    </ul>
+                </div>
+                <div className='card-sort-mob row'>
+                    <div className='col-sm-6 col-6' onClick={() => {this.getSortingModal();}}>
+                        <FontAwesomeIcon 
+                            icon={['fas', 'sort']}
+                            size='1x'
+                        />
+                        <span>Sort</span>
+                    </div>
+                    <div className='col-sm-6 col-6' onClick={() => {this.getFilterModal();}}>
+                    <FontAwesomeIcon 
+                            icon={['fas', 'filter']}
+                            size='1x'
+                        />
+                        <span>Filter</span>
+                    </div>
+                </div>
             </div>
+            
         );
     }
 }

@@ -59,7 +59,6 @@ class Filter extends React.Component {
         render() {
             const {
                 title,
-                isJquerySlider
             } = this.props;
             return (
                 <div className='filter d-none d-sm-none d-md-block d-lg-block d-xl-block'>

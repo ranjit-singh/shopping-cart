@@ -15,7 +15,9 @@ import {
 	faStar,
 	faPlusCircle,
 	faMinusCircle,
-	faRupeeSign
+	faRupeeSign,
+	faSort,
+	faFilter
   } from '@fortawesome/free-solid-svg-icons';
   
   library.add(
@@ -29,7 +31,9 @@ import {
 	faStar,
 	faPlusCircle,
 	faMinusCircle,
-	faRupeeSign
+	faRupeeSign,
+	faSort,
+	faFilter
 );
 import Home from './containers/home/home.component';
 import Checkout from './containers/checkout/checkout.component';
