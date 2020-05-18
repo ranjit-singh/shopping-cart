@@ -5,6 +5,7 @@ import { findIndex, isEmpty } from 'lodash';
 import { RouterPathEnum } from '../../enums/RouterPathEnum';
 import MobileHeader from '../../components/header/mobheader.component';
 import Header from '../../components/header/header.component';
+import removeDuplicateItemAddCount from '../../utils/removeDuplicateItemAddCount';
 import './checkout.scss';
 
 class Checkout extends React.Component<RouteComponentProps<Checkout>, {}> {
@@ -14,7 +15,7 @@ class Checkout extends React.Component<RouteComponentProps<Checkout>, {}> {
     super(props);
     this.state = { 
       isSmallScreen: false,
-      cartItem: this.removeDupliateItemAddCount(this.props.cart)
+      cartItem: removeDuplicateItemAddCount(this.props.cart)
 		 };
   }
   
@@ -29,16 +30,6 @@ class Checkout extends React.Component<RouteComponentProps<Checkout>, {}> {
 
 	private updateDimensions = () => {
 		this.setState({ isSmallScreen: window.innerWidth < 500 });
-  }
-  
-  removeDupliateItemAddCount = (cart: any[]) => {
-    if (isEmpty(cart)) {
-      return [];
-    }
-    return (cart.filter((v: { count: number; id: any; }, i: number, a: any[]) => {
-      let count = 0;
-      a.findIndex((t: { id: any; }) => { if (t.id === v.id) { count += 1; v.count = count; } }); return v;
-    })).filter((v: { id: any; },i: any,a: any[])=>a.findIndex((t: { id: any; })=>(t.id === v.id))===i);
   }
 
   addItem = (item: any) => {

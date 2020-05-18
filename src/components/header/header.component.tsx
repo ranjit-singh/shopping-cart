@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import { RouterPathEnum } from '../../enums/RouterPathEnum';
 import Search from '../search/search.component';
 import CartIcon from '../carticon/carticon.component';
+import removeDuplicateItemAddCount from '../../utils/removeDuplicateItemAddCount';
 import './header.scss';
 
 class Header extends React.Component<React.Props<Header>, {}> {
@@ -32,7 +33,7 @@ class Header extends React.Component<React.Props<Header>, {}> {
                     {!hidden ? 
                     <Link to={ RouterPathEnum.CHECKOUT } className='header__right__shopping-cart'>
                         <CartIcon />
-                        <span className='shopping-cart__count'>{cartItem.length}</span>
+                        <span className='shopping-cart__count'>{removeDuplicateItemAddCount(cartItem).length}</span>
                     </Link>
                     : null}
                 </div>
