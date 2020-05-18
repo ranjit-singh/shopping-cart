@@ -15,7 +15,9 @@ import {
 	faStar,
 	faPlusCircle,
 	faMinusCircle,
-	faRupeeSign
+	faRupeeSign,
+	faSort,
+	faFilter
   } from '@fortawesome/free-solid-svg-icons';
   
   library.add(
@@ -29,21 +31,32 @@ import {
 	faStar,
 	faPlusCircle,
 	faMinusCircle,
-	faRupeeSign
+	faRupeeSign,
+	faSort,
+	faFilter
 );
 import Home from './containers/home/home.component';
 import Checkout from './containers/checkout/checkout.component';
+import getApiItem from './mock/getApiItem';
 import './styles/index.scss';
-import { isEmpty } from 'lodash';
 
 class App extends React.Component {
-	state: { cartItem: any; };
+	state: { cartItem: any; items: any; };
 	constructor(props : any){
 		super(props);
 		this.state = {
-			cartItem: []
+			cartItem: [],
+			items: []
 		};
 		this.onEventHandler = this.onEventHandler.bind(this);
+	}
+
+	callBack = (resp: any) => {
+		console.log(resp);
+		this.setState({ items: JSON.parse(resp).items });
+	}
+	componentDidMount = () => {
+		getApiItem(this.callBack);
 	}
 
 	onEventHandler = (e: any, item: any) => {
@@ -58,12 +71,13 @@ class App extends React.Component {
 
 	public render() {
 		const {
-			cartItem
+			cartItem,
+			items
 		} = this.state;
 		return (
 		<BrowserRouter>
 			<Switch>
-				<Route exact={true} path={RouterPathEnum.HOME} component={() => <Home cart={cartItem} onEvent={(e: any, value: any) => {this.onEventHandler(e, value); }} />} />
+				<Route exact={true} path={RouterPathEnum.HOME} component={() => <Home items={items} cart={cartItem} onEvent={(e: any, value: any) => {this.onEventHandler(e, value); }} />} />
 				<Route exact={true} path={RouterPathEnum.CHECKOUT} component={() => <Checkout cart={cartItem} onEvent={(e: any, value: any) => {this.clearCart(e, value); }} />} />} />
 				<Redirect to={RouterPathEnum.HOME} />
 			</Switch>

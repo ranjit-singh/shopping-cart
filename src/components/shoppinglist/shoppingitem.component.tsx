@@ -49,13 +49,13 @@ class ShoppingItem extends React.Component {
                         <img src={item.image} className='card-img-top' />
                     </div>
                     <div className='s-card__body'>
-                        <div className='s-card__title'>{item.name}</div>
+                        <div className='s-card__title text-ellipsis'>{item.name}</div>
                         <div className='s-card__detail flex flex-row'>
                             <div className='s-card__price'>
                                 <span className='s-card--disprice'>&#x20B9;{item.price.actual}</span>
                                 <span className='s-card--orgprice'><del>{item.price.display}</del></span>
                             </div>
-                            <div className='s-card__discount'>
+                            <div className='s-card--discount'>
                                 <span>{item.discount}% off</span>
                             </div>
                         </div>
@@ -72,7 +72,7 @@ class ShoppingItem extends React.Component {
             const { products } = this.state;
             return (
                 <div className='main-container flex flex-column'>
-                    <Sort onEvent={(type) => {this.SortBy(type);}} />
+                    <Sort onEvent={(type) => {this.SortBy(type);}} onEventFilter={this.props.onEventFilter} />
                     <div className='card-container'>
                         {this.getProductList(products)}
                     </div>
@@ -83,11 +83,11 @@ class ShoppingItem extends React.Component {
 
 ShoppingItem.propTypes = {
     products: PropTypes.shape,
-    onClick: PropTypes.func
+    onEventFilter: PropTypes.func
 };
 ShoppingItem.defaultProps = {
     products: [],
-    onClick: () => {}
+    onEventFilter: () => {}
 };
 
 export default ShoppingItem;

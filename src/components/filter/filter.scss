@@ -18,73 +18,72 @@
         padding: 0;
         overflow: visible;
         position: relative;
-        .ui-rangeslider {
-            position: relative;
-            width: 100%;
-            margin: 50px 0;
-            padding: 0 10px;
-            .ui-rangeslider-sliders {
-                margin: 0;  
-                .ui-slider-track:first-child {
-                    width: 100%;
-                }
-            }
-            .ui-slider-track, .ui-slider-track:first-child {
-                height: 5px !important;
-                .ui-btn.ui-slider-handle {
-                    width: 20px;
-                    height: 20px;
-                    margin: -10px 0 0 -10px;
-                    border-radius: 50%;
-                    background-color: $color-white;
-                    border: 1px solid $color-grey;
-                }
-                .ui-slider-bg {
-                    background-color: $color-blue;
-                }
-            }
-            .rangeslider--rupeesymbol {
-                position: absolute;
-                top: -25px;
-                font-size: 14px;
-                color: $color-grey;
-                &[name='min-price'] {
-                    left: -4px;
-                }
-                &[name='max-price'] {
-                    right: 32px;
-                }
-            }
-        }
-        .ui-slider-input {
-            position: absolute;
-            top: -30px;
-            background-color: transparent;
-            border: none;
-            box-shadow: none;
-            color: $color-grey;
-            text-align: left;
-        }
-        .ui-slider-input[name='price-min'] {
-            left: 0;
-            
-        }
-        .ui-slider-input[name='price-max'] {
-            right: -12px;
-        }
-        .rangeslider__label {
-            position: absolute;
-            width: 100%;
-            top: 14px;
-            text-align: center;
-            color: $color-grey;
-            font-size: 15px;
-            font-weight: 600;
-        }
         .button {
             margin-top: 24px;
             display: block;
             width: 100%;
+        }
+    }
+}
+.rangeslider {
+    position: relative;
+    .horizontal-range__slider--label {
+        position: absolute;
+        text-align: center;
+        display: block;
+        width: 100%;
+        font-weight: bold;
+        color: $color-grey;
+        font-size: 12px;
+        line-height: 12px;
+        top: 34px;
+    }
+}
+.horizontal-range__slider {
+    width: 100%;
+    max-width: 180px;
+    height: 50px;
+    margin: 20px auto 0;
+    .slider__track {
+        top: 25px;
+        height: 5px;
+        background-color: $color-blue;
+        &.slider__track-0, &.slider__track-2 {
+            background-color: $color-darkgrey;
+        }
+    }
+    .slider__thumb {
+        top: 1px;
+        font-size: 12px;
+        font-weight: 600;
+        text-align: center;
+        color: $color-grey;
+        cursor: pointer;
+        box-sizing: border-box;
+        width: 15px;
+        height: 15px;
+        &:before {
+            content: "";
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            background-color: $color-white;
+            border: 1px solid $color-darkgrey;
+            position: absolute;
+            top: 18px;
+            left: 0;
+        }
+        &:after {
+            content: "₹";
+            position: absolute;
+            top: 0;
+            left: -8px;
+        }
+        &:focus {
+            outline: none;
+        }
+        &.slider__thumb-0 {
+            margin-left: -2px;
         }
     }
 }
