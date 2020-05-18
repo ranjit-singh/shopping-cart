@@ -7,7 +7,7 @@
         padding: 20px 20px 20px 0;
         .card-sort__title {
             color: $color-fontgrey;
-            font-size: 20px;
+            font-size: 18px;
             line-height: 22px;
             margin: 0;
             padding-left: 8px;
@@ -17,7 +17,7 @@
             padding-left: 30px;
             .card-sort--item {
                 color: $color-grey;
-                font-size: 14px;
+                font-size: 12px;
                 font-weight: 600;
                 list-style-type: none;
                 margin-right: 30px;
@@ -25,6 +25,7 @@
                 cursor: pointer;
                 &.active {
                     color: $color-blue;
+                    border-bottom: 2px solid $color-blue;
                 }
             }
         }
@@ -68,7 +69,7 @@
         color: $color-green;
     }
     &__footer {
-        padding: 26px 0;
+        padding: 20px 0;
     }
 }
 
@@ -80,6 +81,17 @@
 @media only screen and (max-width: 767px) {
     .s-card {
         width: 50%;
+        padding: 16px 8px;
+        &:nth-child(odd) {
+            border-right: 1px solid $color-bordergrey;
+            border-bottom: 1px solid $color-bordergrey;
+        }
+        &:nth-child(even) {
+            border-bottom: 1px solid $color-bordergrey;
+        }
+        &__footer {
+            padding: 0;
+        }
     }
     .main-container {
         padding-left: 0;
