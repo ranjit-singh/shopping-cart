@@ -72,7 +72,7 @@ class ShoppingItem extends React.Component {
             const { products } = this.state;
             return (
                 <div className='main-container flex flex-column'>
-                    <Sort onEvent={(type) => {this.SortBy(type);}} />
+                    <Sort onEvent={(type) => {this.SortBy(type);}} onEventFilter={this.props.onEventFilter} />
                     <div className='card-container'>
                         {this.getProductList(products)}
                     </div>
@@ -83,11 +83,11 @@ class ShoppingItem extends React.Component {
 
 ShoppingItem.propTypes = {
     products: PropTypes.shape,
-    onClick: PropTypes.func
+    onEventFilter: PropTypes.func
 };
 ShoppingItem.defaultProps = {
     products: [],
-    onClick: () => {}
+    onEventFilter: () => {}
 };
 
 export default ShoppingItem;

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Modal } from 'react-bootstrap';
+import { Modal, Button } from 'react-bootstrap';
 
 class Sort extends React.Component {
     constructor(props: Readonly<{}>) {
@@ -28,7 +28,7 @@ class Sort extends React.Component {
 
     applySorting = (elmObj: any) => {
         this.setState({ sortType: elmObj.key });
-        this.props.onEvent(elmObj.key);
+        this.props.onEvent('sorting', elmObj.key);
     }
 
     getSortElement = () => {
@@ -49,21 +49,27 @@ class Sort extends React.Component {
     getSortingModal = () => {
         return(
             <Modal
-                size="sm"
+                size='sm'
                 show={true}
                 onHide={() => this.setSmShow(false)}
-                aria-labelledby="example-modal-sizes-title-sm"
+                aria-labelledby='sorting-modal-sizes-title-sm'
             >
-            <Modal.Header closeButton>
-            <Modal.Title id="sorting-custom-modal-styling-title">
-                Sort Options
-            </Modal.Title>
-            </Modal.Header>
             <Modal.Body>
+                <div className='filter-mobile__header'>
+                    <h3>Sorting Options</h3>
+                </div>
                 <ul className='card-sort__items flex flex-row'>
                     {this.getSortElement()}
                 </ul>
             </Modal.Body>
+            <Modal.Footer>
+            <Button variant='secondary' onClick={() => {this.setSmShow(false)}}>
+                Cancel
+            </Button>
+            <Button variant='primary' onClick={() => {this.applySorting()}}>
+                Apply
+            </Button>
+            </Modal.Footer>
             </Modal>
         );
     }
@@ -89,7 +95,7 @@ class Sort extends React.Component {
                         />
                         <span>Sort</span>
                     </div>
-                    <div className='col-sm-6 col-6' onClick={() => {this.getFilterModal();}}>
+                    <div className='col-sm-6 col-6' onClick={() => {this.props.onEventFilter('filter', true)}}>
                     <FontAwesomeIcon 
                             icon={['fas', 'filter']}
                             size='1x'
@@ -104,10 +110,12 @@ class Sort extends React.Component {
     }
 }
 Sort.propTypes = {
-    onEvent: PropTypes.func
+    onEvent: PropTypes.func,
+    onEventFilter: PropTypes.func
 };
 Sort.defaultProps = {
-    onEvent: () => {}
+    onEvent: () => {},
+    onEventFilter: () => {}
 };
 
 export default Sort;

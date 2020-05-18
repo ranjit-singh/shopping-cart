@@ -37,9 +37,9 @@ class Filter extends React.Component {
                     <ReactSlider
                         min={minValue}
                         max={maxValue}
-                        className="horizontal-range__slider"
-                        thumbClassName="slider__thumb"
-                        trackClassName="slider__track"
+                        className='horizontal-range__slider'
+                        thumbClassName='slider__thumb'
+                        trackClassName='slider__track'
                         defaultValue={[minValue, maxValue]}
                         ariaLabel={['Lower thumb', 'Upper thumb']}
                         ariaValuetext={state => `Thumb value ${state.valueNow}`}
@@ -58,10 +58,10 @@ class Filter extends React.Component {
 
         render() {
             const {
-                title,
+                title
             } = this.props;
             return (
-                <div className='filter d-none d-sm-none d-md-block d-lg-block d-xl-block'>
+                <div className='filter'>
                     <div className='filter__header'>
                         <h4>{title}</h4>
                     </div>
