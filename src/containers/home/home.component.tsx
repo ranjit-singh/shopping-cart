@@ -33,6 +33,7 @@ static defaultProps: { onEvent: () => {}; cart: []; };
       return item.price.actual > filterOptions.minValue && item.price.actual < filterOptions.maxValue;
     });
     this.setState({ items: filterItems });
+    this.setFilter('filter', false);
   }
 
   onChange = (value: any) => {

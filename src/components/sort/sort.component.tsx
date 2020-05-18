@@ -27,19 +27,22 @@ class Sort extends React.Component {
         ];
     }
 
+    setSortType = (elmObj: any) => {
+        this.setState({ sortType: elmObj.key });
+    }
     applySorting = (elmObj: any) => {
         this.setState({ sortType: elmObj.key });
-        this.props.onEvent('sorting', elmObj.key);
+        this.props.onEvent(elmObj.key);
+        this.setSmShow(false);
     }
 
     getSortRadioElement = () => {
         const contentElm: any = [];
         this.sortList.forEach((elm: { name: React.ReactNode; }) => {
-            const selectedClass = elm.key === this.state.sortType ? 'card-sort--item active' : 'card-sort--item';
             contentElm.push(
-                <li className={selectedClass} onClick={() => {this.applySorting(elm);} } >
+                <li>
                     <label className='radiobox'>{elm.name}
-                        <input type='radio' name='radio' />
+                        <input type='radio' name='radio' value={elm.key} checked={this.state.sortType === elm.key} onClick={() => {this.setSortType(elm);}} />
                         <span className='radio--checked'></span>
                     </label>
                 </li>
@@ -83,7 +86,7 @@ class Sort extends React.Component {
             <Button variant='secondary' onClick={() => {this.setSmShow(false)}}>
                 Cancel
             </Button>
-            <Button variant='primary' onClick={() => {this.applySorting()}}>
+            <Button variant='primary' onClick={() => {this.applySorting({ key: this.state.sortType})}}>
                 Apply
             </Button>
             </Modal.Footer>
