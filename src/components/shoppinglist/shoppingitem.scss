@@ -15,6 +15,7 @@
         .card-sort__items {
             margin: 0;
             padding-left: 30px;
+            display: flex;
             .card-sort--item {
                 color: $color-grey;
                 font-size: 12px;
