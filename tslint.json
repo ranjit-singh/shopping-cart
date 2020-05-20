@@ -1,6 +1,6 @@
 {
 	"extends": [
-		"tslint-immutable"
+		"tslint:recommended"
 	],
 	"rules": {
 		"no-var-keyword": true,

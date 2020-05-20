@@ -39,4 +39,12 @@
 		"forceConsistentCasingInFileNames": true,
 		"importHelpers": true
 	},
+	"include": [
+        "./src/**/*"
+	],
+	"awesomeTypescriptLoaderOptions": {
+        "reportFiles": [
+            "./src/**/*"
+        ]
+    }
 }
