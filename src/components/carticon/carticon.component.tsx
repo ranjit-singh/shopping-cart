@@ -1,12 +1,12 @@
-import * as React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import * as React from 'react';
 
 class CartIcon extends React.Component<React.Props<CartIcon>, {}> {
     constructor(props: React.Props<CartIcon>) {
         super(props);
     }
 
-    render() {
+    public render() {
         return(
             <FontAwesomeIcon
                 icon={['fas', 'shopping-cart']}

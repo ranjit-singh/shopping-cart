@@ -8,15 +8,13 @@
     "typescript",
     "babel",
     "sass",
-    "hmr",
-    "starter",
-    "boilerplate"
+    "hmr"
   ],
   "main": "index.js",
   "scripts": {
     "build": "yarn run clean-dist && webpack -p --config=configs/webpack/prod.js",
     "clean-dist": "rimraf dist/*",
-    "lint": "tslint './src/**/*.ts*' --format stylish --project . --force",
+    "lint": "tslint './src/**/*.tsx*' --format stylish --project . --force",
     "start": "yarn run start-dev",
     "start-dev": "webpack-dev-server --config=configs/webpack/dev.js",
     "start-prod": "yarn run build && node express.js",
@@ -85,6 +83,8 @@
     "react-bootstrap": "^1.0.1",
     "react-dom": "^16.8.0",
     "react-router-dom": "^5.2.0",
-    "react-slider": "^1.0.7"
+    "react-slider": "^1.0.7",
+    "react-scripts": "2.1.1",
+    "redux": "^4.0.1"
   }
 }

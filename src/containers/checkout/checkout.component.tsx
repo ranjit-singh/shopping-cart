@@ -1,39 +1,36 @@
-import * as React from 'react';
-import PropTypes from 'prop-types';
-import { RouteComponentProps } from 'react-router';
-import { findIndex, isEmpty } from 'lodash';
-import { RouterPathEnum } from '../../enums/RouterPathEnum';
+import { assign, findIndex, isEmpty } from 'lodash';
+import React, { Component } from 'react';
 import Header from '../../components/header/header.component';
-import removeDuplicateItemAddCount from '../../utils/removeDuplicateItemAddCount';
-import './checkout.scss';
+import removeDuplicateItemAddCount from '../../utils';
 import './../home/home.scss';
+import './checkout.scss';
 
-class Checkout extends React.Component<RouteComponentProps<Checkout>, {}> {
-  static propTypes: { cart: any };
-  static defaultProps: { cart: []; onEvent: () => {}; };
-  constructor(props : RouteComponentProps<Checkout>){
+class Checkout extends Component <any, any> {
+  public static propTypes: { cart: any; onEvent: any };
+  public static defaultProps: { cart: []; onEvent: null; };
+  constructor(props: any) {
     super(props);
-    this.state = { 
+    this.state = {
       cartItem: removeDuplicateItemAddCount(this.props.cart)
 		 };
   }
 
-  addItem = (item: any) => {
-    const newItem = Object.assign(item);
-    const cartItem = this.state.cartItem;
-    const index = findIndex(cartItem, { id: item.id })
-    if(index !== -1) {
+  public addItem = (item: any) => {
+    const newItem = assign(item);
+    const { cartItem } = this.state;
+    const index = findIndex(cartItem, { id: item.id });
+    if (index !== -1) {
       newItem.count = newItem.count + 1;
       cartItem.splice(index, 1, newItem);
     }
     this.setState({ cartItem });
   }
 
-  removeItem = (item: any, isFullyRemove: boolean) => {
+  public removeItem = (item: any, isFullyRemove: boolean) => {
     const newItem = Object.assign(item);
-    const cartItem = this.state.cartItem;
+    const { cartItem } = this.state;
     const index = findIndex(cartItem, { id: item.id });
-    if(!isFullyRemove && index !== -1 && newItem.count > 1) {
+    if (!isFullyRemove && index !== -1 && newItem.count > 1) {
       newItem.count = newItem.count - 1;
       cartItem.splice(index, 1, newItem);
     } else {
@@ -41,11 +38,11 @@ class Checkout extends React.Component<RouteComponentProps<Checkout>, {}> {
     }
     this.setState({ cartItem });
     if (isEmpty(cartItem)) {
-      this.props.onEvent('click', cartItem);
+      this.props.onEvent();
     }
   }
 
-  getCartItem = () => {
+  public getCartItem = () => {
     const { cartItem } = this.state;
     const contentElm: any = [];
     cartItem.map((item: any) => {
@@ -68,16 +65,16 @@ class Checkout extends React.Component<RouteComponentProps<Checkout>, {}> {
                   </div>
               </div>
               <div className='col-xl-5 col-lg-5 col-md-12 col-sm-12 col-12 c-card__quantity'>
-                <div className='c-card__quantity--remove' onClick={() => {this.removeItem(item, false);}}>
+                <div className='c-card__quantity--remove' onClick={() => {this.removeItem(item, false); }}>
                   <span>-</span>
                 </div>
                 <input type='text' className='c-card__quantity--count' value={item.count} />
-                <div className='c-card__quantity--add' onClick={() => {this.addItem(item);}}>
+                <div className='c-card__quantity--add' onClick={() => {this.addItem(item); }}>
                   <span>+</span>
                 </div>
               </div>
               <div className='c-card__footer flex justify-center col-xl-3 col-lg-2 col-md-12 col-sm-12 col-12'>
-                  <button type='button' className='button button-transparent' onClick={() => {this.removeItem(item, true);}}>REMOVE</button>
+                  <button type='button' className='button button-transparent' onClick={() => {this.removeItem(item, true); }}>REMOVE</button>
               </div>
             </div>
           </div>
@@ -86,8 +83,8 @@ class Checkout extends React.Component<RouteComponentProps<Checkout>, {}> {
     return contentElm;
   }
 
-  getPrice = () => {
-    const cartItem = Object.assign(this.state.cartItem);
+  public getPrice = () => {
+    const { cartItem } = this.state;
     let subTotal = 0;
     let discountTotal = 0;
     let total = 0;
@@ -123,7 +120,7 @@ class Checkout extends React.Component<RouteComponentProps<Checkout>, {}> {
     );
   }
 
-  render() {
+  public render() {
     return(
       <div>
         <Header hidden= {true} />
@@ -137,18 +134,6 @@ class Checkout extends React.Component<RouteComponentProps<Checkout>, {}> {
       </div>
     );
   }
-
-  private onClickMove = ( routerPathEnum: RouterPathEnum ) => {
-    this.props.history.push( routerPathEnum );
-  }
-}
-Checkout.propTypes = {
-  cart: PropTypes.shape,
-  onEvent: PropTypes.func
-}
-Checkout.defaultProps = {
-  cart: [],
-  onEvent: () => {}
 }
 
 export default Checkout;

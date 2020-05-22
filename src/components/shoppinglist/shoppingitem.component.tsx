@@ -1,12 +1,13 @@
+'use-strict';
+import { assign } from 'lodash';
 import * as React from 'react';
-import PropTypes from 'prop-types';
 import Sort from '../sort/sort.component';
 import './shoppingitem.scss';
 
-class ShoppingItem extends React.Component {
-    static propTypes: { products: any; onEvent: any;};
-    static defaultProps: { products: []; onEvent: () => {} };
-    constructor(props: Readonly<{}>) {
+class ShoppingItem extends React.Component <any, any> {
+    public static propTypes: { products: any; onEventFilter: any; };
+    public static defaultProps: { products: []; onEventFilter: null };
+    constructor(props: any) {
         super(props);
         this.state = {
             products: this.props.products
@@ -14,22 +15,22 @@ class ShoppingItem extends React.Component {
         this.addToCart = this.addToCart.bind(this);
     }
 
-    updateState = (props: any) => {
+    public updateState = (props: any) => {
         this.setState({ products: props.products });
     }
 
-    componentWillReceiveProps = (nextProps: any) => {
+    public UNSAFE_componentWillReceiveProps = (nextProps: any) => {
         if (nextProps.products !== this.props.products) {
             this.updateState(nextProps);
         }
     }
 
-    addToCart = (event: any, item: any) => {
+    public addToCart = (event: any, item: any) => {
         this.props.onEvent(event, item);
     }
 
-    SortBy = (type: string) => {
-        const newProducts = Object.assign(this.state.products);
+    public SortBy = (type: any) => {
+        const newProducts = assign(this.state.products);
         if (type === 'high') {
             newProducts.sort((a: { price: { actual: string; }; }, b: { price: { actual: string; }; }) => parseFloat(b.price.actual) - parseFloat(a.price.actual));
         } else if (type === 'low') {
@@ -40,9 +41,9 @@ class ShoppingItem extends React.Component {
         this.setState({ products: newProducts });
     }
 
-    getProductList = (products: any) => {
+    public getProductList = (products: any) => {
         const contentElm: any = [];
-        products.map((item: { image: string | undefined; name: React.ReactNode; price: { actual: React.ReactNode; display: React.ReactNode; }; discount: React.ReactNode; }) => {
+        products.map((item: { image: string; name: string; price: { actual: number; display: number; }; discount: number; }) => {
             contentElm.push(
                 <div className='s-card flex flex-column'>
                     <div className='s-card-header'>
@@ -61,18 +62,18 @@ class ShoppingItem extends React.Component {
                         </div>
                     </div>
                     <div className='s-card__footer flex center'>
-                        <button type='button' className='button button--yellow' onClick={(e) => {this.addToCart(e, item)}}>Add to Cart</button>
+                        <button type='button' className='button button--yellow' onClick={(e) => {this.addToCart(e, item); }}>Add to Cart</button>
                     </div>
                 </div>
         );
         });
         return contentElm;
     }
-        render() {
+        public render() {
             const { products } = this.state;
             return (
                 <div className='main-container flex flex-column'>
-                    <Sort onEvent={(type) => {this.SortBy(type);}} onEventFilter={this.props.onEventFilter} />
+                    <Sort onEvent={(type: any) => {this.SortBy(type); }} onEventFilter={this.props.onEventFilter} />
                     <div className='card-container'>
                         {this.getProductList(products)}
                     </div>
@@ -80,14 +81,5 @@ class ShoppingItem extends React.Component {
             );
         }
 }
-
-ShoppingItem.propTypes = {
-    products: PropTypes.shape,
-    onEventFilter: PropTypes.func
-};
-ShoppingItem.defaultProps = {
-    products: [],
-    onEventFilter: () => {}
-};
 
 export default ShoppingItem;

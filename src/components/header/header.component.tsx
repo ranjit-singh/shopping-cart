@@ -1,19 +1,21 @@
-import * as React from 'react';
-import { Link } from 'react-router-dom';
+'use-strict';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import PropTypes from 'prop-types';
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import { RouterPathEnum } from '../../enums/RouterPathEnum';
-import Search from '../search/search.component';
+import removeDuplicateItemAddCount from '../../utils';
 import CartIcon from '../carticon/carticon.component';
-import removeDuplicateItemAddCount from '../../utils/removeDuplicateItemAddCount';
+import Search from '../search/search.component';
 import './header.scss';
 
-class Header extends React.Component<React.Props<Header>, {}> {
-    constructor(props: React.Props<Header>) {
+class Header extends Component<any, any> {
+    public static propTypes: { cartItem: any; hidden: any; onEvent: any; };
+    public static defaultProps: { cartItem: []; hidden: false; onEvent: null; };
+    constructor(props: any) {
         super(props);
     }
 
-    render() {
+    public render() {
         const {
             cartItem,
             hidden
@@ -30,7 +32,7 @@ class Header extends React.Component<React.Props<Header>, {}> {
                 </div>
                 <div className='header__right flex'>
                     <Search className='header__search-box' />
-                    {!hidden ? 
+                    {!hidden ?
                     <Link to={ RouterPathEnum.CHECKOUT } className='header__right__shopping-cart'>
                         <CartIcon />
                         <span className='shopping-cart__count'>{removeDuplicateItemAddCount(cartItem).length}</span>
@@ -41,15 +43,5 @@ class Header extends React.Component<React.Props<Header>, {}> {
         );
     }
 }
-Header.propTypes = {
-    cartItem: PropTypes.shape,
-    hidden: PropTypes.bool,
-    onEvent: PropTypes.func
-};
-Header.defaultProps = {
-    cartItem: [],
-    hidden: false,
-    onEvent: () => {}
-};
 
 export default Header;

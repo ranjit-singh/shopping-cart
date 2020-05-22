@@ -1,10 +1,12 @@
+'use-strict';
 import * as React from 'react';
-import PropTypes from 'prop-types';
 import ReactSlider from 'react-slider';
 import './filter.scss';
 
-class Filter extends React.Component {
-    constructor(props: Readonly<{}>) {
+class Filter extends React.Component <any, any> {
+    public static propTypes: { title: any; minValue: any; maxValue: any; onEvent: any; };
+    public static defaultProps: { title: ''; minValue: 100; maxValue: 10000; onEvent: null; };
+    constructor(props: any) {
         super(props);
         this.state = {
             minValue: 100,
@@ -13,42 +15,46 @@ class Filter extends React.Component {
         this.applyFilter = this.applyFilter.bind(this);
     }
 
-    onChange = (value: any) => {
-        console.log(value);
+    public onChange = (value: any) => {
         this.setState({ minValue: value[0], maxValue: value[1] });
     }
 
-    applyFilter = () => {
-        const filter = {};
+    public applyFilter = () => {
+        const filter: any = {};
         filter.minValue = this.state.minValue;
         filter.maxValue = this.state.maxValue;
         this.props.onEvent(filter);
     }
 
-    getNormalSlider = () => {
+    public getNormalSlider = () => {
         const contentElm: any = [];
         const {
             minValue,
             maxValue
         } = this.props;
+        const rdProps: any = {
+            min: 100,
+            max: 10000,
+            className: 'horizontal-range__slider',
+            thumbClassName: 'slider__thumb',
+            trackClassName: 'slider__track',
+            minDistance: 10,
+            onChange: (value: any) => {
+                this.onChange(value);
+            }
+        };
         contentElm.push(
             <div className='filter__body'>
                 <div className='form-group rangeslider'>
                     <ReactSlider
-                        min={minValue}
-                        max={maxValue}
-                        className='horizontal-range__slider'
-                        thumbClassName='slider__thumb'
-                        trackClassName='slider__track'
+                        {...rdProps}
                         defaultValue={[minValue, maxValue]}
                         ariaLabel={['Lower thumb', 'Upper thumb']}
-                        ariaValuetext={state => `Thumb value ${state.valueNow}`}
+                        ariaValuetext={(state) => `Thumb value ${state.valueNow}`}
                         renderThumb={(props, state) => <div {...props}>{state.valueNow}</div>}
                         pearling
-                        minDistance={10}
-                        onChange={this.onChange}
                     />
-                    <span htmlFor='price-max'className='horizontal-range__slider--label'>Price</span>
+                    <span className='horizontal-range__slider--label'>Price</span>
                 </div>
                 <button type='submit' className='button button--blue' onClick={this.applyFilter}>Apply</button>
             </div>
@@ -56,7 +62,7 @@ class Filter extends React.Component {
         return contentElm;
     }
 
-        render() {
+        public render() {
             const {
                 title
             } = this.props;
@@ -70,17 +76,5 @@ class Filter extends React.Component {
             );
         }
 }
-Filter.propTypes = {
-    minValue: PropTypes.number,
-    maxValue: PropTypes.number,
-    title: PropTypes.string,
-    onEvent: PropTypes.func
-};
-Filter.defaultProps = {
-    minValue: 100,
-    maxValue: 10000,
-    title: '',
-    onEvent: () => {}
-};
 
 export default Filter;

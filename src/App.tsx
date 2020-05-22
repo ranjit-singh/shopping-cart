@@ -1,26 +1,27 @@
-import React from 'react';
-import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
-import { RouterPathEnum } from './enums/RouterPathEnum';
 import {
 	library
-  } from '@fortawesome/fontawesome-svg-core';
+	} from '@fortawesome/fontawesome-svg-core';
   import { fab } from '@fortawesome/free-brands-svg-icons';
   import {
-	faShoppingCart,
-	faSpinner,
-	faQuoteLeft,
-	faSquare,
 	faCheckSquare,
-	faSearch,
-	faStar,
-	faPlusCircle,
+	faFilter,
 	faMinusCircle,
+	faPlusCircle,
+	faQuoteLeft,
 	faRupeeSign,
+	faSearch,
+	faShoppingCart,
 	faSort,
-	faFilter
-  } from '@fortawesome/free-solid-svg-icons';
-  
-  library.add(
+	faSpinner,
+	faSquare,
+	faStar
+} from '@fortawesome/free-solid-svg-icons';
+import React, { Component } from 'react';
+import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
+import Checkout from './containers/checkout/checkout.component';
+import { RouterPathEnum } from './enums/RouterPathEnum';
+
+library.add(
 	fab,
 	faShoppingCart,
 	faSpinner,
@@ -35,14 +36,13 @@ import {
 	faSort,
 	faFilter
 );
+import { assign } from 'lodash';
 import Home from './containers/home/home.component';
-import Checkout from './containers/checkout/checkout.component';
 import getApiItem from './mock/getApiItem';
 import './styles/index.scss';
 
-class App extends React.Component {
-	state: { cartItem: any; items: any; };
-	constructor(props : any){
+class App extends Component <any, any> {
+	constructor(props: any) {
 		super(props);
 		this.state = {
 			cartItem: [],
@@ -51,22 +51,21 @@ class App extends React.Component {
 		this.onEventHandler = this.onEventHandler.bind(this);
 	}
 
-	callBack = (resp: any) => {
-		console.log(resp);
+	public callBack = (resp: any) => {
 		this.setState({ items: JSON.parse(resp).items });
 	}
-	componentDidMount = () => {
+	public componentDidMount = () => {
 		getApiItem(this.callBack);
 	}
 
-	onEventHandler = (e: any, item: any) => {
-		const cart = Object.assign(this.state.cartItem);
+	public onEventHandler = (_e: any, item: any) => {
+		const cart = assign(this.state.cartItem);
 		cart.push(item);
 		this.setState({ cartItem: cart });
 	}
 
-	clearCart = (e: any, cart: any) => {
-		this.setState({ cartItem: cart });
+	public clearCart = () => {
+		this.setState({ cartItem: [] });
 	}
 
 	public render() {
@@ -78,7 +77,7 @@ class App extends React.Component {
 		<BrowserRouter>
 			<Switch>
 				<Route exact={true} path={RouterPathEnum.HOME} component={() => <Home items={items} cart={cartItem} onEvent={(e: any, value: any) => {this.onEventHandler(e, value); }} />} />
-				<Route exact={true} path={RouterPathEnum.CHECKOUT} component={() => <Checkout cart={cartItem} onEvent={(e: any, value: any) => {this.clearCart(e, value); }} />} />} />
+				<Route exact={true} path={RouterPathEnum.CHECKOUT} component={() => <Checkout cart={cartItem} onEvent={this.clearCart} />} />} />
 				<Redirect to={RouterPathEnum.HOME} />
 			</Switch>
 		</BrowserRouter>
