@@ -10,7 +10,9 @@
     "typescript",
     "babel",
     "sass",
-    "hmr"
+    "hmr",
+    "shopping-cart",
+    "react-shopping-cart"
   ],
   "main": "index.js",
   "scripts": {
