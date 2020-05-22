@@ -6,6 +6,6 @@ var xhttp = new XMLHttpRequest();
         callBack(this.responseText);
     }
   };
-  xhttp.open('GET', '../../shopping-cart/mock/cart.json', true);
+  xhttp.open('GET', '../../mock/cart.json', true);
   xhttp.send();
 }
