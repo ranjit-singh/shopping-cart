@@ -1,6 +1,6 @@
 {
   "name": "shopping-cart",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "",
   "keywords": [
     "react",
@@ -17,7 +17,7 @@
     "lint": "tslint './src/**/*.tsx*' --format stylish --project . --force",
     "start": "yarn run start-dev",
     "start-dev": "webpack-dev-server --config=configs/webpack/dev.js",
-    "start-prod": "yarn run build && node express.js"
+    "start-prod": "yarn run build && node ./src/express.js"
   },
   "repository": {
     "type": "git",
