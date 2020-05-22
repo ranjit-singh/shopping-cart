@@ -85,5 +85,8 @@
     "react-slider": "^1.0.7",
     "react-scripts": "2.1.1",
     "redux": "^4.0.1"
-  }
+  },
+  "engines": {
+		"node": ">=8.9.4."
+	}
 }
