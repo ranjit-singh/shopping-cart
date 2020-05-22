@@ -1,7 +1,9 @@
 {
   "name": "shopping-cart",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "",
+  "private": true,
+  "homepage": "https://ranjit-singh.github.io/shopping-cart",
   "keywords": [
     "react",
     "webpack",
@@ -17,7 +19,9 @@
     "lint": "tslint './src/**/*.tsx*' --format stylish --project . --force",
     "start": "yarn run start-dev",
     "start-dev": "webpack-dev-server --config=configs/webpack/dev.js",
-    "start-prod": "yarn run build && node ./src/express.js"
+    "start-prod": "yarn run build && node ./src/express.js",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist"
   },
   "repository": {
     "type": "git",
@@ -28,7 +32,6 @@
   "bugs": {
     "url": "https://github.com/ranjit-singh/shopping-cart/issues"
   },
-  "homepage": "https://github.com/ranjit-singh/shopping-cart#readme",
   "devDependencies": {
     "@babel/cli": "^7.8.4",
     "@babel/core": "^7.9.6",

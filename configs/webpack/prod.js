@@ -7,9 +7,9 @@ module.exports = merge(commonConfig, {
   mode: 'production',
   entry: './index.tsx',
   output: {
-    filename: 'js/bundle.[hash].min.js',
+    filename: 'js/adobe.[hash].min.js',
     path: resolve(__dirname, '../../dist'),
-    publicPath: '/',
+    publicPath: '/shopping-cart/',
   },
   devtool: 'source-map',
   plugins: [
