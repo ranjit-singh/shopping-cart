@@ -17,8 +17,7 @@
     "lint": "tslint './src/**/*.tsx*' --format stylish --project . --force",
     "start": "yarn run start-dev",
     "start-dev": "webpack-dev-server --config=configs/webpack/dev.js",
-    "start-prod": "yarn run build && node express.js",
-    "test": "jest --coverage --watchAll --config=configs/jest.json"
+    "start-prod": "yarn run build && node express.js"
   },
   "repository": {
     "type": "git",
