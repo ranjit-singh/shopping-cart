@@ -38,7 +38,7 @@ library.add(
 );
 import { assign } from 'lodash';
 import Home from './containers/home/home.component';
-import getApiItem from './mock/getApiItem';
+import getApiItem from './fetchApi/getApiItem';
 import './styles/index.scss';
 
 class App extends Component <any, any> {

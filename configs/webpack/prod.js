@@ -1,6 +1,6 @@
 const merge = require('webpack-merge');
 const {resolve} = require('path');
-
+const CopyPlugin = require('copy-webpack-plugin');
 const commonConfig = require('./common');
 
 module.exports = merge(commonConfig, {
@@ -12,5 +12,11 @@ module.exports = merge(commonConfig, {
     publicPath: '/',
   },
   devtool: 'source-map',
-  plugins: [],
+  plugins: [
+    new CopyPlugin({
+      patterns: [
+        { from: '../mock/cart.json', to: 'mock/cart.json' }
+      ],
+    })
+  ],
 });

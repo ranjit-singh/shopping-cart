@@ -1,4 +1,4 @@
-// import cart from '../../src/mock/cart.json;
+// import cart from '../../mock/cart.json;
 export default(callBack: (arg0: string) => void) => {
 var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function() {
@@ -6,6 +6,6 @@ var xhttp = new XMLHttpRequest();
         callBack(this.responseText);
     }
   };
-  xhttp.open('GET', '../../src/mock/cart.json', true);
+  xhttp.open('GET', '../../mock/cart.json', true);
   xhttp.send();
 }

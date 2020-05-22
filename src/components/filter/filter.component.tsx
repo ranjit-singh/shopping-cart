@@ -28,10 +28,6 @@ class Filter extends React.Component <any, any> {
 
     public getNormalSlider = () => {
         const contentElm: any = [];
-        const {
-            minValue,
-            maxValue
-        } = this.props;
         const rdProps: any = {
             min: 100,
             max: 10000,
@@ -48,7 +44,7 @@ class Filter extends React.Component <any, any> {
                 <div className='form-group rangeslider'>
                     <ReactSlider
                         {...rdProps}
-                        defaultValue={[minValue, maxValue]}
+                        defaultValue={[100, 10000]}
                         ariaLabel={['Lower thumb', 'Upper thumb']}
                         ariaValuetext={(state) => `Thumb value ${state.valueNow}`}
                         renderThumb={(props, state) => <div {...props}>{state.valueNow}</div>}
