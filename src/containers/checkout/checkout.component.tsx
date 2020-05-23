@@ -1,3 +1,4 @@
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { assign, findIndex, isEmpty } from 'lodash';
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
@@ -68,11 +69,15 @@ class Checkout extends Component <any, any> {
               </div>
               <div className='col-xl-5 col-lg-5 col-md-12 col-sm-12 col-12 c-card__quantity'>
                 <div className='c-card__quantity--remove' onClick={() => {this.removeItem(item, false); }}>
-                  <span>-</span>
+                    <FontAwesomeIcon
+                        icon={['fas', 'minus']}
+                    />
                 </div>
                 <input type='text' className='c-card__quantity--count' value={item.count} />
                 <div className='c-card__quantity--add' onClick={() => {this.addItem(item); }}>
-                  <span>+</span>
+                  <FontAwesomeIcon
+                        icon={['fas', 'plus']}
+                    />
                 </div>
               </div>
               <div className='c-card__footer flex justify-center col-xl-3 col-lg-2 col-md-12 col-sm-12 col-12'>

@@ -14,7 +14,10 @@ import {
 	faSort,
 	faSpinner,
 	faSquare,
-	faStar
+	faStar,
+	faTimes,
+	faPlus,
+	faMinus
 } from '@fortawesome/free-solid-svg-icons';
 import React, { Component } from 'react';
 import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
@@ -34,7 +37,10 @@ library.add(
 	faMinusCircle,
 	faRupeeSign,
 	faSort,
-	faFilter
+	faFilter,
+	faTimes,
+	faPlus,
+	faMinus
 );
 import { assign } from 'lodash';
 import Home from './containers/home/home.component';

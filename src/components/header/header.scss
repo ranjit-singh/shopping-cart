@@ -27,7 +27,8 @@
             position: relative;
             color: $color-white !important;
             cursor: pointer;
-            margin-left: 20px;
+            margin-left: 10px;
+            display: flex;
             align-items: center;
             &:hover {
                 color: $color-white;

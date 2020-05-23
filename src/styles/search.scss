@@ -5,29 +5,29 @@
         border-bottom: 1px solid $color-white !important;
         background-color: transparent;
         border-radius: 0;
-        padding: 0 50px 0 4px;
+        padding: 0 40px 0 4px;
         outline: none;
         color: $color-white;
         line-height: 28px;
         width: 200px;
     }
     input::-webkit-input-placeholder {
-        color: $color-white;
-        opacity: 1;
-      }
-      
-      input:-ms-input-placeholder {
-        color: $color-white;
-        opacity: 1;
-      }
-      
-      input::placeholder {
-        color: $color-white;
-        opacity: 1;
-      }
-      input:-internal-autofill-selected {
-        background-color: transparent;
-      }
+      color: $color-white;
+      opacity: 1;
+    }
+    
+    input:-ms-input-placeholder {
+      color: $color-white;
+      opacity: 1;
+    }
+    
+    input::placeholder {
+      color: $color-white;
+      opacity: 1;
+    }
+    input:-internal-autofill-selected {
+      background-color: transparent;
+    }
     input:-webkit-autofill, input:-webkit-autofill:hover, input:-webkit-autofill:focus {
         -webkit-text-fill-color: $color-white;
         transition: background-color 5000s ease-in-out 0s;
@@ -50,12 +50,18 @@
 
         }
     }
-    
     svg[data-icon="search"] {
         color: $color-white;
         position: absolute;
-        right: 5px;
+        right: 0;
         bottom: 13px;
+        cursor: pointer;
+    }
+    .search__clear {
+      position: absolute;
+      top: 3px;
+      right: 25px;
+      cursor: pointer;
     }
 }
 @media only screen and (max-width: 767px) {

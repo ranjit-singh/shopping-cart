@@ -53,11 +53,6 @@
         &--remove, &--add, &--count {
             border: 1px solid $color-darkgrey;
             margin: 8px;
-            span {
-                line-height: 30px;
-                font-weight: 100;
-                height: 100%;
-            }
         }
         &--remove, &--add {
             border-radius: 50%;
@@ -67,14 +62,8 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 34px;
+            font-size: 18px;
             cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        &--remove {
-            
         }
         &--count {
             width: 36px;
@@ -83,9 +72,6 @@
             font-size: 18px;
             font-weight: 600;
             text-align: center;
-        }
-        &--add {
-            
         }
     }
     &__body {
@@ -174,6 +160,7 @@
             &--remove, &--add {
                 width: 30px;
                 height: 30px;
+                font-size: 16px;
             }
             &--count {
                 width: 30px;
