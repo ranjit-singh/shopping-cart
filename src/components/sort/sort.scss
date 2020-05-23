@@ -1,5 +1,33 @@
 @import '../../styles/index.scss';
 
+.card-sort {
+    padding: 20px 20px 20px 0;
+    .card-sort__title {
+        color: $color-fontgrey;
+        font-size: 18px;
+        line-height: 22px;
+        margin: 0;
+        padding-left: 8px;
+    }
+    .card-sort__items {
+        margin: 0;
+        padding-left: 30px;
+        .card-sort--item {
+            color: $color-grey;
+            font-size: 12px;
+            font-weight: 600;
+            list-style-type: none;
+            margin-right: 30px;
+            line-height: 22px;
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+            &.active {
+                color: $color-blue;
+                border-color: $color-blue;
+            }
+        }
+    }
+}
 .m-card-sort__items {
     padding: 0;
     margin: 0;

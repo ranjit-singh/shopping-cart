@@ -55,7 +55,7 @@
             margin: 8px;
             span {
                 line-height: 10px;
-                margin-top: -8px;
+                height: 16px;
             }
         }
         &--remove, &--add {
@@ -68,6 +68,9 @@
             justify-content: center;
             font-size: 34px;
             cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         &--remove {
             
@@ -170,6 +173,9 @@
             &--remove, &--add {
                 width: 30px;
                 height: 30px;
+                span {
+                    margin-top: 2px;
+                }
             }
             &--count {
                 width: 30px;
@@ -198,11 +204,14 @@
         }
         .c-card__quantity {
             justify-content: flex-start;
-            padding: 15px 5px;
+            padding: 15px 0 !important;
         }
         .c-card__footer {
             justify-content: flex-start;
-            padding: 0;
+            padding: 0 !important;
+            .button {
+                padding: 6px 10px !important;
+            }
         }
     }
 
