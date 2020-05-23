@@ -54,8 +54,9 @@
             border: 1px solid $color-darkgrey;
             margin: 8px;
             span {
-                line-height: 10px;
-                height: 16px;
+                line-height: 30px;
+                font-weight: 100;
+                height: 100%;
             }
         }
         &--remove, &--add {
@@ -173,9 +174,6 @@
             &--remove, &--add {
                 width: 30px;
                 height: 30px;
-                span {
-                    margin-top: 2px;
-                }
             }
             &--count {
                 width: 30px;

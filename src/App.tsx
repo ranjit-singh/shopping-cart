@@ -46,7 +46,8 @@ class App extends Component <any, any> {
 		super(props);
 		this.state = {
 			cartItem: [],
-			items: []
+			items: [],
+			searchStr: ''
 		};
 		this.onEventHandler = this.onEventHandler.bind(this);
 	}
@@ -64,20 +65,25 @@ class App extends Component <any, any> {
 		this.setState({ cartItem: cart });
 	}
 
-	public clearCart = () => {
-		this.setState({ cartItem: [] });
+	public onEventHandle = (value: any) => {
+		if (value) {
+			this.setState({ searchStr: value });
+		} else {
+			this.setState({ cartItem: [] });
+		}
 	}
 
 	public render() {
 		const {
 			cartItem,
-			items
+			items,
+			searchStr
 		} = this.state;
 		return (
 		<BrowserRouter>
 			<Switch>
-				<Route exact={true} path={RouterPathEnum.HOME} component={() => <Home items={items} cart={cartItem} onEvent={(e: any, value: any) => {this.onEventHandler(e, value); }} />} />
-				<Route exact={true} path={RouterPathEnum.CHECKOUT} component={() => <Checkout cart={cartItem} onEvent={this.clearCart} />} />} />
+				<Route exact={true} path={RouterPathEnum.HOME} component={() => <Home items={items} cart={cartItem} onEvent={(e: any, value: any) => {this.onEventHandler(e, value); }} searchInput={searchStr} />} />
+				<Route exact={true} path={RouterPathEnum.CHECKOUT} component={() => <Checkout cart={cartItem} onEvent={this.onEventHandle} />} />} />
 				<Redirect to={RouterPathEnum.HOME} />
 			</Switch>
 		</BrowserRouter>

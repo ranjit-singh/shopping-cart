@@ -9,8 +9,8 @@ import Search from '../search/search.component';
 import './header.scss';
 
 class Header extends Component<any, any> {
-    public static propTypes: { cartItem: any; hidden: any; onEvent: any; };
-    public static defaultProps: { cartItem: []; hidden: false; onEvent: null; };
+    public static propTypes: { cartItem: any; hidden: any; onEvent: any; searchInput: any };
+    public static defaultProps: { cartItem: []; hidden: false; onEvent: null; searchInput: ''; };
     constructor(props: any) {
         super(props);
     }
@@ -18,7 +18,8 @@ class Header extends Component<any, any> {
     public render() {
         const {
             cartItem,
-            hidden
+            hidden,
+            searchInput
         } = this.props;
         return(
             <header className='header flex'>
@@ -31,7 +32,7 @@ class Header extends Component<any, any> {
                     </Link>
                 </div>
                 <div className='header__right flex'>
-                    <Search className='header__search-box' />
+                    <Search className='header__search-box' onEventSearch={(value: any) => this.props.onEvent(value)} searchInput={searchInput} />
                     {!hidden ?
                     <Link to={ RouterPathEnum.CHECKOUT } className='header__right__shopping-cart'>
                         <CartIcon />

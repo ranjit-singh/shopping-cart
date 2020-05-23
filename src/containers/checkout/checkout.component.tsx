@@ -1,6 +1,8 @@
 import { assign, findIndex, isEmpty } from 'lodash';
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
 import Header from '../../components/header/header.component';
+import { RouterPathEnum } from '../../enums/RouterPathEnum';
 import removeDuplicateItemAddCount from '../../utils';
 import './../home/home.scss';
 import './checkout.scss';
@@ -120,10 +122,15 @@ class Checkout extends Component <any, any> {
     );
   }
 
+  public searchItem = (value: any) => {
+    this.props.history.push(RouterPathEnum.HOME);
+    this.props.onEvent(value);
+  }
+
   public render() {
     return(
       <div>
-        <Header hidden= {true} />
+        <Header hidden= {true} onEvent={this.searchItem} />
         <div className='co-container'>
           <div className='c-card-container'>
             {this.getCartItem()}
@@ -136,4 +143,4 @@ class Checkout extends Component <any, any> {
   }
 }
 
-export default Checkout;
+export default withRouter(Checkout);

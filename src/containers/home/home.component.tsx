@@ -6,10 +6,11 @@ import Filter from '../../components/filter/filter.component';
 import Header from '../../components/header/header.component';
 import ShoppingItem from '../../components/shoppinglist/shoppingitem.component';
 import './home.scss';
+import { isEmpty } from 'lodash';
 
 class Home extends Component <any, any> {
-  public static propTypes: { cart: any; items: any; onEvent: any; };
-  public static defaultProps: { cart: []; items: any; onEvent: null; };
+  public static propTypes: { cart: any; items: any; onEvent: any; searchStr: any; };
+  public static defaultProps: { cart: []; items: any; onEvent: null; searchStr: ''; };
 	constructor(props: any) {
 		super(props);
 		this.state = {
@@ -22,12 +23,19 @@ class Home extends Component <any, any> {
      this.applyFilter = this.applyFilter.bind(this);
   }
 
+  public componentDidMount = () => {
+    console.log('outside-->', this.props.searchInput);
+    if (!isEmpty(this.props.searchInput)) {
+        this.searchItem(this.props.searchInput);
+    }
+  }
+
   public setCartItem = (e: any, item: any) => {
     this.props.onEvent(e, item);
   }
 
   public applyFilter = (filterOptions: { minValue: number; maxValue: number; }) => {
-    const { items } = this.props;
+    const { items } = isEmpty(this.state.items) ? this.props : this.state;
     const filterItems = items.filter((item: { price: { actual: number; }; }) => {
       return item.price.actual > filterOptions.minValue && item.price.actual < filterOptions.maxValue;
     });
@@ -40,6 +48,10 @@ class Home extends Component <any, any> {
 }
 
   public getModalBody = () => {
+    const {
+      minValue,
+      maxValue
+  } = this.state;
     const contentElm: any = [];
     const rdProps: any = {
         min: 100,
@@ -61,7 +73,7 @@ class Home extends Component <any, any> {
         <div className='form-group rangeslider'>
             <ReactSlider
                 {...rdProps}
-                defaultValue={[100, 100000]}
+                defaultValue={[minValue, maxValue]}
                 ariaLabel={['Lower thumb', 'Upper thumb']}
                 ariaValuetext={(state) => `Thumb value ${state.valueNow}`}
                 renderThumb={(props, state) => <div {...props}>{state.valueNow}</div>}
@@ -107,17 +119,28 @@ class Home extends Component <any, any> {
     this.setState({ showFilterModal: value });
   }
 
+  public searchItem = (searchStr: any) => {
+    const { items } = this.props;
+    console.log('!isEmpty(', searchStr);
+    
+    const searchItems = items.filter((item: any) => {
+        return item.name.toLowerCase().indexOf(searchStr.toLowerCase()) > -1;
+    });
+    this.setState({ items: searchItems });
+  }
+
   public render() {
     const {
       items
      } = this.state;
      const {
-       cart
+       cart,
+       searchInput
      } = this.props;
     return(
       <div className='container-fluid wrapper'>
         <div className='row'>
-          <Header cartItem={cart} />
+          <Header cartItem={cart} onEvent={this.searchItem} searchInput={searchInput} />
           <main className='home-container'>
             <div className='d-none d-sm-none d-md-block d-lg-block d-xl-block'>
               <Filter title={'Filters'} onEvent={this.applyFilter} />

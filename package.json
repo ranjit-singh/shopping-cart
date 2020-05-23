@@ -89,9 +89,10 @@
     "react": "^16.8.0",
     "react-bootstrap": "^1.0.1",
     "react-dom": "^16.8.0",
+    "react-router": "^5.2.0",
     "react-router-dom": "^5.2.0",
-    "react-slider": "^1.0.7",
     "react-scripts": "2.1.1",
+    "react-slider": "^1.0.7",
     "redux": "^4.0.1"
   },
   "engines": {
