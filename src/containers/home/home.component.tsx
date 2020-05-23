@@ -16,7 +16,7 @@ class Home extends Component <any, any> {
         items: this.props.items,
         showFilterModal: false,
         minValue: 100,
-        maxValue: 10000
+        maxValue: 100000
     };
      this.setCartItem = this.setCartItem.bind(this);
      this.applyFilter = this.applyFilter.bind(this);
@@ -43,7 +43,7 @@ class Home extends Component <any, any> {
     const contentElm: any = [];
     const rdProps: any = {
         min: 100,
-        max: 10000,
+        max: 100000,
         className: 'horizontal-range__slider',
         thumbClassName: 'slider__thumb',
         trackClassName: 'slider__track',
@@ -61,7 +61,7 @@ class Home extends Component <any, any> {
         <div className='form-group rangeslider'>
             <ReactSlider
                 {...rdProps}
-                defaultValue={[100, 10000]}
+                defaultValue={[100, 100000]}
                 ariaLabel={['Lower thumb', 'Upper thumb']}
                 ariaValuetext={(state) => `Thumb value ${state.valueNow}`}
                 renderThumb={(props, state) => <div {...props}>{state.valueNow}</div>}
