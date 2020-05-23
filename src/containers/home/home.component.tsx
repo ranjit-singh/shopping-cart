@@ -17,14 +17,14 @@ class Home extends Component <any, any> {
         items: this.props.items,
         showFilterModal: false,
         minValue: 100,
-        maxValue: 100000
+        maxValue: 100000,
+        searchInput: this.props.searchInput
     };
      this.setCartItem = this.setCartItem.bind(this);
      this.applyFilter = this.applyFilter.bind(this);
   }
 
   public componentDidMount = () => {
-    console.log('outside-->', this.props.searchInput);
     if (!isEmpty(this.props.searchInput)) {
         this.searchItem(this.props.searchInput);
     }
@@ -35,9 +35,10 @@ class Home extends Component <any, any> {
   }
 
   public applyFilter = (filterOptions: { minValue: number; maxValue: number; }) => {
-    const { items } = isEmpty(this.state.items) ? this.props : this.state;
-    const filterItems = items.filter((item: { price: { actual: number; }; }) => {
-      return item.price.actual > filterOptions.minValue && item.price.actual < filterOptions.maxValue;
+    const { items } = this.props;
+    const { searchInput } = this.state;
+    const filterItems = items.filter((item: { name: string, price: { actual: number; }; }) => {
+      return item.price.actual > filterOptions.minValue && item.price.actual < filterOptions.maxValue && item.name.toLowerCase().indexOf(searchInput.toLowerCase()) > -1;
     });
     this.setState({ items: filterItems });
     this.setFilter('filter', false);
@@ -121,12 +122,10 @@ class Home extends Component <any, any> {
 
   public searchItem = (searchStr: any) => {
     const { items } = this.props;
-    console.log('!isEmpty(', searchStr);
-    
     const searchItems = items.filter((item: any) => {
         return item.name.toLowerCase().indexOf(searchStr.toLowerCase()) > -1;
     });
-    this.setState({ items: searchItems });
+    this.setState({ items: searchItems, searchInput: searchStr });
   }
 
   public render() {
