@@ -22,6 +22,11 @@ class Home extends Component <any, any> {
     };
      this.setCartItem = this.setCartItem.bind(this);
      this.applyFilter = this.applyFilter.bind(this);
+     this.onChange = this.onChange.bind(this);
+     this.getModalBody = this.getModalBody.bind(this);
+     this.getMobileFilter = this.getMobileFilter.bind(this);
+     this.setFilter = this.setFilter.bind(this);
+     this.searchItem = this.searchItem.bind(this);
   }
 
   public componentDidMount = () => {

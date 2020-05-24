@@ -9,7 +9,7 @@ module.exports = merge(commonConfig, {
   output: {
     filename: 'js/adobe.[hash].min.js',
     path: resolve(__dirname, '../../dist'),
-    publicPath: '/shopping-cart/',
+    publicPath: '/',
   },
   devtool: 'source-map',
   plugins: [

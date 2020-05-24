@@ -20,6 +20,9 @@ class Search extends Component<any, any> {
             value: !isEmpty(this.props.searchInput) ? this.props.searchInput : ''
         };
         // this.searchInput = utilizeFocus();
+        this.setSearchValue = this.setSearchValue.bind(this);
+        this.showSearch = this.showSearch.bind(this);
+        this.clearSearch = this.clearSearch.bind(this);
     }
 
     public componentDidMount = () => {

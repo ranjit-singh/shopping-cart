@@ -9,13 +9,18 @@ import './../home/home.scss';
 import './checkout.scss';
 
 class Checkout extends Component <any, any> {
-  public static propTypes: { cart: any; onEvent: any };
-  public static defaultProps: { cart: []; onEvent: null; };
+  public static propTypes: { cart: any; onEvent: any; searchInput: any; };
+  public static defaultProps: { cart: []; onEvent: null; searchInput: ''; };
   constructor(props: any) {
     super(props);
     this.state = {
       cartItem: removeDuplicateItemAddCount(this.props.cart)
-		 };
+     };
+     this.addItem = this.addItem.bind(this);
+     this.removeItem = this.removeItem.bind(this);
+     this.getCartItem = this.getCartItem.bind(this);
+     this.getPrice = this.getPrice.bind(this);
+     this.searchItem = this.searchItem.bind(this);
   }
 
   public addItem = (item: any) => {
@@ -135,7 +140,7 @@ class Checkout extends Component <any, any> {
   public render() {
     return(
       <div>
-        <Header hidden= {true} onEvent={this.searchItem} />
+        <Header hidden= {true} onEvent={this.searchItem} searchInput={this.props.searchInput} />
         <div className='co-container'>
           <div className='c-card-container'>
             {this.getCartItem()}

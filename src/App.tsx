@@ -1,11 +1,13 @@
 import {
 	library
 	} from '@fortawesome/fontawesome-svg-core';
-  import { fab } from '@fortawesome/free-brands-svg-icons';
-  import {
+import { fab } from '@fortawesome/free-brands-svg-icons';
+import {
 	faCheckSquare,
 	faFilter,
+	faMinus,
 	faMinusCircle,
+	faPlus,
 	faPlusCircle,
 	faQuoteLeft,
 	faRupeeSign,
@@ -15,12 +17,10 @@ import {
 	faSpinner,
 	faSquare,
 	faStar,
-	faTimes,
-	faPlus,
-	faMinus
+	faTimes
 } from '@fortawesome/free-solid-svg-icons';
 import React, { Component } from 'react';
-import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Redirect, Route, Switch } from 'react-router-dom';
 import Checkout from './containers/checkout/checkout.component';
 import { RouterPathEnum } from './enums/RouterPathEnum';
 
@@ -86,13 +86,13 @@ class App extends Component <any, any> {
 			searchStr
 		} = this.state;
 		return (
-		<BrowserRouter>
+		<Router>
 			<Switch>
 				<Route exact={true} path={RouterPathEnum.HOME} component={() => <Home items={items} cart={cartItem} onEvent={(e: any, value: any) => {this.onEventHandler(e, value); }} searchInput={searchStr} />} />
-				<Route exact={true} path={RouterPathEnum.CHECKOUT} component={() => <Checkout cart={cartItem} onEvent={this.onEventHandle} />} />} />
+				<Route path={RouterPathEnum.CHECKOUT} component={() => <Checkout cart={cartItem} onEvent={this.onEventHandle} />} searchInput={searchStr} />} />
 				<Redirect to={RouterPathEnum.HOME} />
 			</Switch>
-		</BrowserRouter>
+		</Router>
 		);
 	}
 }

@@ -13,6 +13,9 @@ class ShoppingItem extends React.Component <any, any> {
             products: this.props.products
         };
         this.addToCart = this.addToCart.bind(this);
+        this.updateState = this.updateState.bind(this);
+        this.SortBy = this.SortBy.bind(this);
+        this.getProductList = this.getProductList.bind(this);
     }
 
     public updateState = (props: any) => {

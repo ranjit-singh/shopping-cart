@@ -13,6 +13,8 @@ class Filter extends React.Component <any, any> {
             maxValue: 100000
         };
         this.applyFilter = this.applyFilter.bind(this);
+        this.onChange = this.onChange.bind(this);
+        this.getNormalSlider = this.getNormalSlider.bind(this);
     }
 
     public onChange = (value: any) => {

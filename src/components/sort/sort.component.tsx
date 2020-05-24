@@ -15,6 +15,12 @@ class Sort extends React.Component <any, any> {
             sortType: '',
             showModal: false
         };
+        this.setSortType = this.setSortType.bind(this);
+        this.applySorting = this.applySorting.bind(this);
+        this.getSortRadioElement = this.getSortRadioElement.bind(this);
+        this.getSortElement = this.getSortElement.bind(this);
+        this.setSmShow = this.setSmShow.bind(this);
+        this.getSortingModal = this.getSortingModal.bind(this);
         this.sortList = [
             {
                 key: 'high',
